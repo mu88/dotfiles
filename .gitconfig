@@ -1,0 +1,6 @@
+[core]
+	autocrlf = true
+	editor = \"Code.exe\" --wait
+[user]
+	name = mu88
+	email = 4560672+mu88@users.noreply.github.com
