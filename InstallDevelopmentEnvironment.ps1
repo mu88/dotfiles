@@ -26,6 +26,7 @@ choco install powertoys -fy
 choco install windirstat -fy
 choco install sysinternals -fy
 choco install notepadplusplus -fy
+choco install winmerge -fy
 choco install joplin -fy
 choco install ditto -fy
 choco install agentransack -fy
