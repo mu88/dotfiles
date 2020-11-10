@@ -18,13 +18,15 @@ choco install notepadplusplus -fy
 choco install vscode -fy
 choco install visualstudio2019enterprise -fy --params "--locale en-US --add Microsoft.VisualStudio.Workload.NetCoreTools;Microsoft.VisualStudio.Workload.NetWeb;includeRecommended --passive"
 
-# Additional Debuggers
+# Web development
 choco install fiddler -fy
+choco install postman -fy
 
 # Database Tools
 choco install sql-server-management-studio -fy
 
 # Helpers
+choco install keepass -fy
 choco install powertoys -fy
 choco install windirstat -fy
 choco install sysinternals -fy
@@ -33,6 +35,8 @@ choco install ditto -fy
 choco install agentransack -fy
 choco install veracrypt -fy
 choco install adobereader -fy
+choco install pdfcreator -fy
 choco install vlc -fy
+choco install screenpresso -fy
 choco install 7zip -fy
 choco install paint.net -fy
