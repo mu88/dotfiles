@@ -22,6 +22,9 @@ choco install jetbrains-rider -fy
 choco install powershell-core -fy
 choco install firacode -fy
 choco install firacodenf -fy
+choco install oh-my-posh -fy
+choco install poshgit -fy
+choco install terminal-icons.powershell -fy
 
 # Web development / network analysis
 choco install fiddler -fy
@@ -33,19 +36,18 @@ choco install winpcap -fy
 choco install sql-server-management-studio -fy
 
 # Helpers
-choco install keepass -fy
-choco install powertoys -fy
-choco install windirstat -fy
-choco install sysinternals -fy
-choco install joplin -fy
-choco install ditto -fy
-choco install agentransack -fy
-choco install veracrypt -fy
-choco install adobereader -fy
-choco install pdfcreator -fy
-choco install vlc -fy
-choco install screenpresso -fy
 choco install 7zip -fy
+choco install adobereader -fy
+choco install agentransack -fy
+choco install ditto -fy
+choco install joplin -fy
+choco install keepass -fy
 choco install paint.net -fy
+choco install pdfcreator -fy
 choco install powertoys -fy
+choco install screenpresso -fy
+choco install sysinternals -fy
+choco install veracrypt -fy
+choco install vlc -fy
+choco install windirstat -fy
 choco install winscp -fy
