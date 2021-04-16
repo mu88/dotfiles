@@ -22,9 +22,6 @@ choco install jetbrains-rider -fy
 choco install powershell-core -fy
 choco install firacode -fy
 choco install firacodenf -fy
-choco install oh-my-posh -fy
-choco install poshgit -fy
-choco install terminal-icons.powershell -fy
 
 # Web development / network analysis
 choco install fiddler -fy
@@ -51,3 +48,8 @@ choco install veracrypt -fy
 choco install vlc -fy
 choco install windirstat -fy
 choco install winscp -fy
+
+Install-Module PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck
+Install-Module oh-my-posh -Scope CurrentUser
+Install-Module posh-git -Scope CurrentUser
+Install-Module Terminal-Icons -Repository PSGallery
