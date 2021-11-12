@@ -15,7 +15,7 @@ choco install gitextensions -fy
 choco install nodejs -fy
 choco install notepadplusplus -fy
 choco install vscode -fy
-choco install visualstudio2019enterprise -fy --params "--locale en-US --add Microsoft.VisualStudio.Workload.NetCoreTools;Microsoft.VisualStudio.Workload.NetWeb;includeRecommended --passive"
+choco install visualstudio2022professional -fy --params "--locale en-US"
 choco install jetbrains-rider -fy
 
 # Shell / Terminal
