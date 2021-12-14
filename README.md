@@ -11,7 +11,7 @@
 ## ReSharper / Rider Plugins
 
 - [.ignore](https://plugins.jetbrains.com/plugin/7495--ignore)
-- [AsyncConverter](https://github.com/BigBabay/AsyncConverter)
+- [AsyncApostle](https://plugins.jetbrains.com/plugin/17946-asyncapostle)
 - [CognitiveComplexity](https://github.com/matkoch/resharper-cognitivecomplexity)
 - [EnhancedTooltip](https://github.com/MrJul/ReSharper.EnhancedTooltip/)
 - [Extra Icons](https://plugins.jetbrains.com/plugin/11058-extra-icons)
