@@ -1,7 +1,6 @@
 # Develoment Tools
 
 ## Visual Studio Extensions
-
 - [SwitchStartupProject](https://heptapod.host/thirteen/switchstartupproject/)
 - [Markdown Editor](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.MarkdownEditor)
 - [GhostDoc](https://submain.com/ghostdoc/)
@@ -9,7 +8,6 @@
 
 
 ## ReSharper / Rider Plugins
-
 - [.ignore](https://plugins.jetbrains.com/plugin/7495--ignore)
 - [AsyncApostle](https://plugins.jetbrains.com/plugin/17946-asyncapostle)
 - [CognitiveComplexity](https://github.com/matkoch/resharper-cognitivecomplexity)
@@ -23,3 +21,6 @@
 - [Multirun](https://plugins.jetbrains.com/plugin/7248-multirun)
 - [Structured Logging](https://plugins.jetbrains.com/plugin/12832-structured-logging)
 - [Test Linker 2](https://plugins.jetbrains.com/plugin/15518-test-linker-2)
+
+## Stack Overflow
+-  [My preferred search](https://stackoverflow.com/search?tab=newest&q=(%20%5btdd%5d%20or%20%5bxunit%5d%20or%20%5bnunit%5d%20or%20%5bunit-testing%5d%20or%20%5brider%5d%20or%20%5bresharper%5d%20or%20%5bnuget%5d%20or%20%5bmsbuild%5d%20)%20and%20(%20%5bC%23%5d%20or%20%5brider%5d%20or%20%5bresharper%5d%20or%20%5bnuget%5d%20or%20%5bmsbuild%5d%20)%20and%20(%20hasaccepted%3ano%20))
