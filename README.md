@@ -8,6 +8,7 @@
 
 
 ## ReSharper / Rider Plugins
+- [.env files support](https://plugins.jetbrains.com/plugin/9525--env-files-support)
 - [.ignore](https://plugins.jetbrains.com/plugin/7495--ignore)
 - [AsyncApostle](https://plugins.jetbrains.com/plugin/17946-asyncapostle)
 - [CognitiveComplexity](https://github.com/matkoch/resharper-cognitivecomplexity)
@@ -17,8 +18,10 @@
 - [FluentValidation](https://github.com/matkoch/resharper-fluentvalidation)
 - [Grazie](https://plugins.jetbrains.com/plugin/12175-grazie)
 - [Heap Allocation Viewer](https://plugins.jetbrains.com/plugin/9223-heap-allocations-viewer)
+- [Key Promoter X](https://plugins.jetbrains.com/plugin/9792-key-promoter-x)
 - [MoqComplete](https://github.com/Abc-Arbitrage/Abc.MoqComplete)
 - [Multirun](https://plugins.jetbrains.com/plugin/7248-multirun)
+- [String Manipulation](https://plugins.jetbrains.com/plugin/2162-string-manipulation)
 - [Structured Logging](https://plugins.jetbrains.com/plugin/12832-structured-logging)
 - [Test Linker 2](https://plugins.jetbrains.com/plugin/15518-test-linker-2)
 
