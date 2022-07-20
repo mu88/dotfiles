@@ -26,4 +26,4 @@
 - [Test Linker 2](https://plugins.jetbrains.com/plugin/15518-test-linker-2)
 
 ## Stack Overflow
--  [My preferred search](https://stackoverflow.com/search?tab=newest&q=(%20%5btdd%5d%20or%20%5bxunit%5d%20or%20%5bnunit%5d%20or%20%5bunit-testing%5d%20or%20%5brider%5d%20or%20%5bresharper%5d%20or%20%5bnuget%5d%20or%20%5bmsbuild%5d%20)%20and%20(%20%5bC%23%5d%20or%20%5brider%5d%20or%20%5bresharper%5d%20or%20%5bnuget%5d%20or%20%5bmsbuild%5d%20)%20and%20(%20hasaccepted%3ano%20))
+-  [My preferred search](https://stackoverflow.com/search?tab=newest&q=(%20[tdd]%20or%20[xunit]%20or%20[nunit]%20or%20[unit-testing]%20or%20[rider]%20or%20[resharper]%20or%20[nuget]%20or%20[msbuild]%20)%20and%20(%20[C%23]%20or%20[rider]%20or%20[resharper]%20or%20[nuget]%20or%20[msbuild]%20)%20and%20(%20answers%3a0%20))
