@@ -12,6 +12,7 @@
 - [.ignore](https://plugins.jetbrains.com/plugin/7495--ignore)
 - [AsyncApostle](https://plugins.jetbrains.com/plugin/17946-asyncapostle)
 - [CognitiveComplexity](https://github.com/matkoch/resharper-cognitivecomplexity)
+- [Conventional Commit](https://plugins.jetbrains.com/plugin/13389-conventional-commit)
 - [EnhancedTooltip](https://github.com/MrJul/ReSharper.EnhancedTooltip/)
 - [Extra Icons](https://plugins.jetbrains.com/plugin/11058-extra-icons)
 - [FluentAssertions](https://github.com/matkoch/resharper-fluentassertions)
