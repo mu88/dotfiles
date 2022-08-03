@@ -17,6 +17,7 @@
 - [Extra Icons](https://plugins.jetbrains.com/plugin/11058-extra-icons)
 - [FluentAssertions](https://github.com/matkoch/resharper-fluentassertions)
 - [FluentValidation](https://github.com/matkoch/resharper-fluentvalidation)
+- [GitToolBox](https://plugins.jetbrains.com/plugin/7499-gittoolbox)
 - [Grazie](https://plugins.jetbrains.com/plugin/12175-grazie)
 - [Heap Allocation Viewer](https://plugins.jetbrains.com/plugin/9223-heap-allocations-viewer)
 - [Key Promoter X](https://plugins.jetbrains.com/plugin/9792-key-promoter-x)
