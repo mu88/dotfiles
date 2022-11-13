@@ -13,12 +13,14 @@ choco install gitextensions -fy
 
 # IDE and essential development
 choco install nodejs -fy
+choco install dotnet-sdk -fy
 choco install notepadplusplus -fy
 choco install vscode -fy
 choco install visualstudio2022professional -fy --params "--locale en-US"
-choco install jetbrains-rider -fy
+choco install jetbrainstoolbox -fy
 
 # Shell / Terminal
+choco install microsoft-windows-terminal -fy
 choco install powershell-core -fy
 choco install firacode -fy
 choco install firacodenf -fy
@@ -35,7 +37,6 @@ choco install sql-server-management-studio -fy
 
 # Helpers
 choco install 7zip -fy
-choco install adobereader -fy
 choco install agentransack -fy
 choco install ditto -fy
 choco install joplin -fy
