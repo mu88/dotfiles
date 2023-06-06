@@ -1,6 +1,6 @@
 Import-Module posh-git
 Import-Module -Name Terminal-Icons
-oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\agnoster.omp.json" | Invoke-Expression
+oh-my-posh init pwsh --config "OhMyPosh.json" | Invoke-Expression
 
 # See https://www.hanselman.com/blog/adding-predictive-intellisense-to-my-windows-terminal-powershell-prompt-with-psreadline
 Set-PSReadLineOption -PredictionSource History
