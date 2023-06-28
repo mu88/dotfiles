@@ -57,8 +57,8 @@
           "style": "powerline",
           "powerline_symbol": "",
           "invert_powerline": false,
+          "background": "#ff009d",
           "foreground": "#ffffff",
-          "background": "#ffff66",
           "leading_diamond": "",
           "trailing_diamond": ""
         },
@@ -144,14 +144,6 @@
           "style": "powerline",
           "template": " \ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} ",
           "type": "aws"
-        },
-        {
-          "background": "#ffff66",
-          "foreground": "#111111",
-          "powerline_symbol": "\ue0b0",
-          "style": "powerline",
-          "template": " \uf0ad ",
-          "type": "root"
         },
         {
           "background": "#83769c",
