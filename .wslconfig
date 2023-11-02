@@ -1,0 +1,17 @@
+[wsl2]
+
+# Limits VM memory in WSL 2 up to 3GB
+memory=5GB
+
+# Makes the WSL 2 VM use two virtual processors
+# processors=2
+
+swapfile=D:\\WSL\\swap.vhdx
+
+# see https://github.com/microsoft/WSL/issues/10216
+WSL2_WESTON_SHELL_OVERRIDE=desktop-shell
+guiApplications=false
+
+[experimental]
+autoMemoryReclaim=gradual
+sparseVhd=true
