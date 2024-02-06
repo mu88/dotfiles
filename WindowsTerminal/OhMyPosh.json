@@ -10,10 +10,16 @@
           "properties": {
             "style": "folder"
           },
-          "leading_diamond": "\ue0b6",
-          "style": "diamond",
-          "template": " \uea83 {{ .Path }} ",
+          "style": "plain",
+          "template": "<background,parentBackground>\ue0b6</> \uea83 {{ .Path }} {{ if or (gt (len .Segments) 1) (.Root) }}{{ else }}<background,transparent>\ue0b4</>{{ end }}",
           "type": "path"
+        },
+        {
+          "background": "#ff009d",
+          "foreground": "#ffffff",
+          "style": "plain",
+          "template": "<parentBackground,background>\ue0b0</>  {{ if gt (len .Segments) 2 }}{{ else }}<background,transparent>\ue0b4</>{{ end }}",
+          "type": "root"
         },
         {
           "background": "#FFFB38",
@@ -24,102 +30,83 @@
             "{{ if gt .Behind 0 }}#C792EA{{ end }}"
           ],
           "foreground": "#011627",
-          "powerline_symbol": "\ue0b0",
           "properties": {
             "branch_icon": "\ue725 ",
             "fetch_status": true,
             "fetch_upstream_icon": true
           },
-          "style": "powerline",
-          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<#ef5350> \uf046 {{ .Staging.String }}</>{{ end }} ",
+          "style": "plain",
+          "template": "<parentBackground,background>\ue0b0</> {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<#ef5350> \uf046 {{ .Staging.String }}</>{{ end }} {{ if or (and (eq (len .Segments) 3) (.Root)) (and (eq (len .Segments) 2) (not .Root)) }}<background,transparent>\ue0b4</>{{ else }}{{ end }}",
           "type": "git"
         },
         {
-          "type": "dotnet",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "invert_powerline": false,
-          "foreground": "#ffffff",
           "background": "#6CA35E",
-          "template": "  {{ .Full }} "
-        },
-        {
-          "type": "root",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "invert_powerline": false,
-          "background": "#ff009d",
           "foreground": "#ffffff",
-          "leading_diamond": "",
-          "trailing_diamond": ""
+          "style": "plain",
+          "template": "<parentBackground,background>\ue0b0</>  {{ .Full }} <background,transparent>\ue0b4</>",
+          "type": "dotnet"
         },
         {
           "background": "#6CA35E",
           "foreground": "#ffffff",
-          "powerline_symbol": "\ue0b0",
           "properties": {
             "fetch_version": true
           },
-          "style": "powerline",
-          "template": " \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
+          "style": "plain",
+          "template": "<parentBackground,background>\ue0b0</> \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} <background,transparent>\ue0b4</>",
           "type": "node"
         },
         {
           "background": "#8ED1F7",
           "foreground": "#111111",
-          "powerline_symbol": "\ue0b0",
           "properties": {
             "fetch_version": true
           },
-          "style": "powerline",
-          "template": " \ue626 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "style": "plain",
+          "template": "<parentBackground,background>\ue0b0</> \ue626 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} <background,transparent>\ue0b4</>",
           "type": "go"
         },
         {
           "background": "#4063D8",
           "foreground": "#111111",
-          "powerline_symbol": "\ue0b0",
           "properties": {
             "fetch_version": true
           },
-          "style": "powerline",
-          "template": " \ue624 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "style": "plain",
+          "template": "<parentBackground,background>\ue0b0</> \ue624 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} <background,transparent>\ue0b4</>",
           "type": "julia"
         },
         {
           "background": "#FFDE57",
           "foreground": "#111111",
-          "powerline_symbol": "\ue0b0",
           "properties": {
             "display_mode": "files",
             "fetch_virtual_env": false
           },
-          "style": "powerline",
-          "template": " \ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "style": "plain",
+          "template": "<parentBackground,background>\ue0b0</> \ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} <background,transparent>\ue0b4</>",
           "type": "python"
         },
         {
           "background": "#AE1401",
           "foreground": "#ffffff",
-          "powerline_symbol": "\ue0b0",
           "properties": {
             "display_mode": "files",
             "fetch_version": true
           },
-          "style": "powerline",
-          "template": " \ue791 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "style": "plain",
+          "template": "<parentBackground,background>\ue0b0</> \ue791 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} <background,transparent>\ue0b4</>",
           "type": "ruby"
         },
         {
           "background": "#FEAC19",
           "foreground": "#ffffff",
-          "powerline_symbol": "\ue0b0",
           "properties": {
             "display_mode": "files",
             "fetch_version": false
           },
-          "style": "powerline",
-          "template": " \uf0e7{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "style": "plain",
+          "template": "<parentBackground,background>\ue0b0</> \uf0e7{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} <background,transparent>\ue0b4</>",
           "type": "azfunc"
         },
         {
@@ -128,14 +115,18 @@
             "{{if contains \"jan\" .Profile}}#f1184c{{end}}"
           ],
           "foreground": "#ffffff",
-          "powerline_symbol": "\ue0b0",
           "properties": {
             "display_default": false
           },
-          "style": "powerline",
-          "template": " \ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} ",
+          "style": "plain",
+          "template": "<parentBackground,background>\ue0b0</> \ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} <background,transparent>\ue0b4</>",
           "type": "aws"
-        },
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "segments": [
         {
           "background": "#00897b",
           "background_templates": [
@@ -145,9 +136,9 @@
           "properties": {
             "always_enabled": true
           },
-          "powerline_symbol": "\ue0b0",
-          "style": "powerline",
+          "style": "diamond",
           "template": " \ue23a ",
+          "leading_diamond": "\ue0b6",
           "type": "exit"
         },
         {
@@ -157,26 +148,18 @@
             "style": "roundrock",
             "threshold": 0
           },
-          "style": "diamond",
-          "template": " \ueba2{{ .FormattedMs }}\u2800",
-          "trailing_diamond": "\ue0b4",
+          "style": "plain",
+          "template": "<background,parentBackground>\ue0b2</> \ueba2 {{ .FormattedMs }} ",
           "type": "executiontime"
-        }
-      ],
-      "type": "prompt"
-    },
-    {
-      "segments": [
+        },
         {
           "background": "#2e9599",
           "foreground": "#111111",
-          "leading_diamond": "\ue0b6",
           "properties": {
             "time_format": "_2, 15:04:05"
           },
-          "style": "diamond",
-          "template": " \uf073 {{ .CurrentDate | date .Format }} ",
-          "trailing_diamond": "\ue0b4",
+          "style": "plain",
+          "template": "<background,parentBackground>\ue0b2</> \uf073 {{ .CurrentDate | date .Format }} <background,transparent>\ue0b4</>",
           "type": "time"
         }
       ],
