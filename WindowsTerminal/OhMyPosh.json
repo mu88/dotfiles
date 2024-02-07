@@ -8,7 +8,7 @@
           "background": "#c17e1a",
           "foreground": "#ffffff",
           "properties": {
-            "style": "folder"
+            "style": "agnoster_short"
           },
           "style": "plain",
           "template": "<background,parentBackground>\ue0b6</> \uea83 {{ .Path }} {{ if or (gt (len .Segments) 1) (.Root) }}{{ else }}<background,transparent>\ue0b4</>{{ end }}",
