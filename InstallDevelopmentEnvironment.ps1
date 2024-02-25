@@ -17,7 +17,7 @@ choco install dotnet-sdk -fy
 choco install notepadplusplus -fy
 choco install vscode -fy
 choco install visualstudio2022professional -fy --params "--locale en-US"
-choco install jetbrainstoolbox -fy
+choco install jetbrainstoolbox -fy # consider adding '--ia "/D=C:\new\path"' as otherwise the toolbox will be installed to %LOCALAPPDATA%
 
 # Shell / Terminal
 choco install microsoft-windows-terminal -fy
