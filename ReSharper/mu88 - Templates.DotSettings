@@ -241,6 +241,19 @@ public async Task $TestName$()&#xD;
 	// Assert&#xD;
 	throw new System.NotImplementedException();&#xD;
 }</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A9AA73A5AA2CD547915E349AFDE34382/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A9AA73A5AA2CD547915E349AFDE34382/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A9AA73A5AA2CD547915E349AFDE34382/Description/@EntryValue">Creates an ILogger variable for the current type</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A9AA73A5AA2CD547915E349AFDE34382/Field/=CurrentType/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A9AA73A5AA2CD547915E349AFDE34382/Field/=CurrentType/Expression/@EntryValue">typeName()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A9AA73A5AA2CD547915E349AFDE34382/Field/=CurrentType/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A9AA73A5AA2CD547915E349AFDE34382/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A9AA73A5AA2CD547915E349AFDE34382/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A9AA73A5AA2CD547915E349AFDE34382/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A9AA73A5AA2CD547915E349AFDE34382/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A9AA73A5AA2CD547915E349AFDE34382/Shortcut/@EntryValue">logger</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A9AA73A5AA2CD547915E349AFDE34382/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A9AA73A5AA2CD547915E349AFDE34382/Text/@EntryValue">ILogger&lt;$CurrentType$&gt; logger</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=C486D92410FA8C46AD1A824AD410616E/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=C486D92410FA8C46AD1A824AD410616E/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=C486D92410FA8C46AD1A824AD410616E/Field/=TestName/@KeyIndexDefined">True</s:Boolean>
