@@ -1,3 +1,8 @@
+# Run only in Windows Terminal as other terminals might not properly support other PowerShell modules and screw up the formatting
+if (!$env:WT_SESSION) {
+    return
+}
+
 Import-Module posh-git
 Import-Module -Name Terminal-Icons
 oh-my-posh init pwsh --config "OhMyPosh.json" | Invoke-Expression
