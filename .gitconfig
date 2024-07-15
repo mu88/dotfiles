@@ -1,11 +1,11 @@
 [includeIf "gitdir:**/GitHub/"]
-	path = .gitconfig-github
+    path = .gitconfig-github
 [core]
     autocrlf = true
     editor = \"Code.exe\" --wait
-	longpaths = true
+    longpaths = true
 [i18n]
-	filesEncoding = utf-8
+    filesEncoding = utf-8
 [user]
     name = mu88
     email = 4560672+mu88@users.noreply.github.com
@@ -28,8 +28,8 @@
     # Delete all local branches that have no remote branch
     prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -D
 
-	# Run "dotnet versionize", sign the created commit via "amend" and move the tag to the new commit
-	versionize = "!f() { \
+    # Run "dotnet versionize", sign the created commit via "amend" and move the tag to the new commit
+    versionize = "!f() { \
         dotnet versionize; \
         original_commit=$(git rev-parse HEAD); \
         tag_name=$(git tag --points-at $original_commit); \
@@ -45,4 +45,4 @@
         echo \"Tag $tag_name moved to new commit $new_commit.\"; \
     }; f"
 [credential]
-	helper = wincred
+    helper = wincred

@@ -1,0 +1,12 @@
+root = true
+
+[*]
+indent_size = 4
+indent_style = space
+charset = utf-8
+
+[{*.json, *.yml, *.yaml}]
+indent_size = 2
+
+[{*.DotSettings}]
+indent_style = tab
