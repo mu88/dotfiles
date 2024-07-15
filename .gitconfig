@@ -1,6 +1,11 @@
+[includeIf "gitdir:**/GitHub/"]
+	path = .gitconfig-github
 [core]
     autocrlf = true
     editor = \"Code.exe\" --wait
+	longpaths = true
+[i18n]
+	filesEncoding = utf-8
 [user]
     name = mu88
     email = 4560672+mu88@users.noreply.github.com
@@ -39,3 +44,5 @@
         git tag -a $tag_name -m \"$tag_name\" $new_commit; \
         echo \"Tag $tag_name moved to new commit $new_commit.\"; \
     }; f"
+[credential]
+	helper = wincred
