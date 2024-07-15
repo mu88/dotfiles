@@ -22,3 +22,20 @@
 
     # Delete all local branches that have no remote branch
     prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -D
+
+	# Run "dotnet versionize", sign the created commit via "amend" and move the tag to the new commit
+	versionize = "!f() { \
+        dotnet versionize; \
+        original_commit=$(git rev-parse HEAD); \
+        tag_name=$(git tag --points-at $original_commit); \
+        if [ -z \"$tag_name\" ]; then \
+            echo \"No tag found pointing to the original commit.\"; \
+            exit 1; \
+        fi; \
+        echo \"Found tag: $tag_name\"; \
+        git tag -d $tag_name; \
+        git commit --amend --no-edit -S; \
+        new_commit=$(git rev-parse HEAD); \
+        git tag -a $tag_name -m \"$tag_name\" $new_commit; \
+        echo \"Tag $tag_name moved to new commit $new_commit.\"; \
+    }; f"
