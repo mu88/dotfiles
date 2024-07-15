@@ -13,8 +13,10 @@
     {
         "defaults":
         {
-            "fontFace": "FiraCode NF",
-            "fontSize": 11,
+            "font": {
+                "face": "FiraCode NF",
+                "size": 11
+            },
             "startingDirectory": "%USERPROFILE%\\Documents\\Development\\source",
             "backgroundImage": "%USERPROFILE%\\Documents\\Development\\Background.JPG",
             "backgroundImageOpacity" : 0.2
