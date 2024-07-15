@@ -1,24 +1,24 @@
 [core]
-	autocrlf = true
-	editor = \"Code.exe\" --wait
+    autocrlf = true
+    editor = \"Code.exe\" --wait
 [user]
-	name = mu88
-	email = 4560672+mu88@users.noreply.github.com
+    name = mu88
+    email = 4560672+mu88@users.noreply.github.com
 [alias]
-	# Find feature branch from ticket number
-	fb = "!f() { git branch -a | grep ""feature/.*$1.*"" | sed 's/remotes.//' | sed 's/origin.//' | sort -u; }; f"
+    # Find feature branch from ticket number
+    fb = "!f() { git branch -a | grep ""feature/.*$1.*"" | sed 's/remotes.//' | sed 's/origin.//' | sort -u; }; f"
 
-	# Checkout feature branch from ticket number
-	cfb = "!f() { featureBranch=$(git fb $1); git checkout $featureBranch; git pull; }; f"
-	
-	# Get current branch name
-	currentbranch = rev-parse --abbrev-ref HEAD
+    # Checkout feature branch from ticket number
+    cfb = "!f() { featureBranch=$(git fb $1); git checkout $featureBranch; git pull; }; f"
+    
+    # Get current branch name
+    currentbranch = rev-parse --abbrev-ref HEAD
 
-	# Get Jira ticket number from current branch name
-	jiran = "!f() { git currentbranch | sed ""s/feature.//"" | grep -o -E ""PRJ+-[0-9]+""; }; f"
+    # Get Jira ticket number from current branch name
+    jiran = "!f() { git currentbranch | sed ""s/feature.//"" | grep -o -E ""PRJ+-[0-9]+""; }; f"
 
-	# Open Browser on Jira ticket
-	j = "!explorer https://jira.company.com/projects/issues/issue-$(git jiran)"
+    # Open Browser on Jira ticket
+    j = "!explorer https://jira.company.com/projects/issues/issue-$(git jiran)"
 
-	# Delete all local branches that have no remote branch
-	prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -D
+    # Delete all local branches that have no remote branch
+    prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -D

@@ -16,7 +16,7 @@
             "fontFace": "FiraCode NF",
             "fontSize": 11,
             "startingDirectory": "%USERPROFILE%\\Documents\\Development\\source",
-            "backgroundImage": "%USERPROFILE%\\Documents\\Development\\Adventure_0354.JPG",
+            "backgroundImage": "%USERPROFILE%\\Documents\\Development\\Background.JPG",
             "backgroundImageOpacity" : 0.2
         },
         "list":
