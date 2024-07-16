@@ -7,6 +7,6 @@
     # Run "gpg --list-secret-keys"
     # Run "gpg --edit-key <<GitHub Key>>"
     # Grab the 16 char long ID "BLABLUBTRALALALA" of the entry "sec  rsa4096/BLABLUBTRALALALA"
-    signingkey = <<grab the secret's key>>
+    signingkey = 22DC58317AC29D13
 [credential "https://github.com"]
     username = mu88
