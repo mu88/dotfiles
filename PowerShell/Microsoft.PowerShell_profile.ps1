@@ -1,3 +1,6 @@
+$scriptDirectory = Split-Path $PSCommandPath
+Push-Location $scriptDirectory
+
 # Run only in Windows Terminal as other terminals might not properly support other PowerShell modules and screw up the formatting
 if (!$env:WT_SESSION) {
     return
@@ -19,3 +22,5 @@ Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
            [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
         }
 }
+
+Pop-Location
