@@ -17,10 +17,16 @@
     currentbranch = rev-parse --abbrev-ref HEAD
 
     # Get Jira ticket number from current branch name
-    jiran = "!f() { git currentbranch | sed ""s/feature.//"" | grep -o -E ""PRJ+-[0-9]+""; }; f"
+    jiran = "!f() { git currentbranch | sed ""s/feature.//"" | grep -o -E ""[A-Za-z]+-[0-9]+""; }; f"
 
     # Open Browser on Jira ticket
-    j = "!explorer https://jira.company.com/projects/issues/issue-$(git jiran)"
+    j = "!f() { \
+        if [ -z \"$MU88_JIRA\" ]; then \
+            echo \"The environment variable MU88_JIRA is not set.\"; \
+            exit 1; \
+        fi; \
+        explorer $MU88_JIRA/browse/$(git jiran); \
+    }; f"
 
     # Delete all local branches that have no remote branch
     prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -D
