@@ -1,0 +1,7 @@
+#!/bin/sh
+if [ -z \"$MU88_DOTFILES\" ]; then
+    echo \"The environment variable MU88_DOTFILES is not set.\"
+    exit 1
+fi
+
+pwsh -noprofile "$MU88_DOTFILES/Git/hooks/EnsureConventionalCommitMessage.ps1" $1
