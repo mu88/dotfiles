@@ -1,5 +1,4 @@
-$scriptDirectory = Split-Path $PSCommandPath
-Push-Location $scriptDirectory
+Push-Location $PSScriptRoot
 
 # Run only in Windows Terminal as other terminals might not properly support other PowerShell modules and screw up the formatting
 if (!$env:WT_SESSION) {
