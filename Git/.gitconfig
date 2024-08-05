@@ -2,7 +2,6 @@
     path = .gitconfig-github
 [core]
     autocrlf = true
-    editor = \"Code.exe\" --wait
     longpaths = true
 [i18n]
     filesEncoding = utf-8
