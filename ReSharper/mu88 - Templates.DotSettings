@@ -17,6 +17,16 @@
 	
 	
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=C4795E57DDEC1C4F97BBC8C7173EBBCA/Position/@EntryValue">8</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=21A835F81486FF4985FD15F7EE3C3C94/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=21A835F81486FF4985FD15F7EE3C3C94/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=21A835F81486FF4985FD15F7EE3C3C94/Description/@EntryValue">Create a new XML doc comment list item</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=21A835F81486FF4985FD15F7EE3C3C94/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=21A835F81486FF4985FD15F7EE3C3C94/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=21A835F81486FF4985FD15F7EE3C3C94/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=21A835F81486FF4985FD15F7EE3C3C94/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=21A835F81486FF4985FD15F7EE3C3C94/Shortcut/@EntryValue">xmldoclistitem</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=21A835F81486FF4985FD15F7EE3C3C94/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=21A835F81486FF4985FD15F7EE3C3C94/Text/@EntryValue">&lt;item&gt;&lt;description&gt;$END$&lt;/description&gt;&lt;/item&gt;</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3BC9640AFDCB344082B2901B0B5444ED/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3BC9640AFDCB344082B2901B0B5444ED/Applicability/=Surround/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3BC9640AFDCB344082B2901B0B5444ED/Description/@EntryValue">Surrounds the given block with a Stopwatch</s:String>
@@ -200,6 +210,21 @@ public class $Class$
         throw new System.NotImplementedException();
     }
 }</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=79A58F36D8247A4597BB457074CC8B67/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=79A58F36D8247A4597BB457074CC8B67/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=79A58F36D8247A4597BB457074CC8B67/Description/@EntryValue">Create an XML doc comment list</s:String>
+	
+	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=79A58F36D8247A4597BB457074CC8B67/Field/=listType/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=79A58F36D8247A4597BB457074CC8B67/Field/=listType/Expression/@EntryValue">list("bullet,number,table")</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=79A58F36D8247A4597BB457074CC8B67/Field/=listType/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=79A58F36D8247A4597BB457074CC8B67/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=79A58F36D8247A4597BB457074CC8B67/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=79A58F36D8247A4597BB457074CC8B67/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=79A58F36D8247A4597BB457074CC8B67/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=79A58F36D8247A4597BB457074CC8B67/Shortcut/@EntryValue">xmldoclist</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=79A58F36D8247A4597BB457074CC8B67/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=79A58F36D8247A4597BB457074CC8B67/Text/@EntryValue">&lt;list type="$listType$"&gt;&lt;item&gt;&lt;description&gt;$END$&lt;/description&gt;&lt;/item&gt;&lt;/list&gt;</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=8134D7065AD3244B8B566BB163DFE9BC/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=8134D7065AD3244B8B566BB163DFE9BC/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=8134D7065AD3244B8B566BB163DFE9BC/Field/=Condition/@KeyIndexDefined">True</s:Boolean>
