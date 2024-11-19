@@ -131,9 +131,12 @@ public void $MethodUnderTest$_Should$Do$_When$Condition$()
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=44C36584DD976A4F9FAAC50439B8DB92/Field/=TestName/@KeyIndexDefined">False</s:Boolean>
 	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=44C36584DD976A4F9FAAC50439B8DB92/Reformat/@EntryValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=44C36584DD976A4F9FAAC50439B8DB92/Scope/=ABDFB0613102DF4DBB59387506ADA616/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=44C36584DD976A4F9FAAC50439B8DB92/Scope/=ABDFB0613102DF4DBB59387506ADA616/CustomProperties/=mask/@EntryIndexedValue">nunit.framework</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=44C36584DD976A4F9FAAC50439B8DB92/Scope/=ABDFB0613102DF4DBB59387506ADA616/Type/@EntryValue">InProjectWithReference</s:String>
+	
+	
+	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=44C36584DD976A4F9FAAC50439B8DB92/Scope/=C41E13C6A9E49B48A3CA89E735234942/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=44C36584DD976A4F9FAAC50439B8DB92/Scope/=C41E13C6A9E49B48A3CA89E735234942/CustomProperties/=Provider/@EntryIndexedValue">NUnit3x</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=44C36584DD976A4F9FAAC50439B8DB92/Scope/=C41E13C6A9E49B48A3CA89E735234942/Type/@EntryValue">InTestProject</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=44C36584DD976A4F9FAAC50439B8DB92/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=44C36584DD976A4F9FAAC50439B8DB92/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=44C36584DD976A4F9FAAC50439B8DB92/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
@@ -182,9 +185,12 @@ public class $Class$
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=62762F0E5A8FBF49A1FA873BC0F04A90/Field/=Namespace/Expression/@EntryValue">fileDefaultNamespace()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=62762F0E5A8FBF49A1FA873BC0F04A90/Field/=Namespace/Order/@EntryValue">3</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=62762F0E5A8FBF49A1FA873BC0F04A90/Reformat/@EntryValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=62762F0E5A8FBF49A1FA873BC0F04A90/Scope/=ABDFB0613102DF4DBB59387506ADA616/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=62762F0E5A8FBF49A1FA873BC0F04A90/Scope/=ABDFB0613102DF4DBB59387506ADA616/CustomProperties/=mask/@EntryIndexedValue">xunit.core</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=62762F0E5A8FBF49A1FA873BC0F04A90/Scope/=ABDFB0613102DF4DBB59387506ADA616/Type/@EntryValue">InProjectWithReference</s:String>
+	
+	
+	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=62762F0E5A8FBF49A1FA873BC0F04A90/Scope/=C41E13C6A9E49B48A3CA89E735234942/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=62762F0E5A8FBF49A1FA873BC0F04A90/Scope/=C41E13C6A9E49B48A3CA89E735234942/CustomProperties/=Provider/@EntryIndexedValue">xUnit</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=62762F0E5A8FBF49A1FA873BC0F04A90/Scope/=C41E13C6A9E49B48A3CA89E735234942/Type/@EntryValue">InTestProject</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=62762F0E5A8FBF49A1FA873BC0F04A90/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=62762F0E5A8FBF49A1FA873BC0F04A90/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=62762F0E5A8FBF49A1FA873BC0F04A90/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
