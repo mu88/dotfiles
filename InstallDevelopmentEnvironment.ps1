@@ -55,6 +55,8 @@ choco install eraser -y
 choco install joplin -y
 choco install keepass -y
 choco install keepass-plugin-kpscript -y
+choco install bitwarden --ia '/allusers' -y
+choco install bitwarden-cli --ia '/allusers' -y
 choco install paint.net -y
 choco install pdfcreator -y
 choco install powertoys -y
