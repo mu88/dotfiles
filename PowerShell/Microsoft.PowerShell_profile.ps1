@@ -7,6 +7,9 @@ if (!$env:WT_SESSION) {
 
 Import-Module posh-git
 Import-Module -Name Terminal-Icons
+
+# See https://github.com/JanDeDobbeleer/oh-my-posh/issues/6535#issuecomment-3077804893
+$env:OSTYPE = $null
 oh-my-posh init pwsh --config "OhMyPosh.json" | Invoke-Expression
 
 # See https://www.hanselman.com/blog/adding-predictive-intellisense-to-my-windows-terminal-powershell-prompt-with-psreadline
