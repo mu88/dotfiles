@@ -1,3 +1,5 @@
+[Environment]::SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "true", [System.EnvironmentVariableTarget]::User)
+
 # Browsers
 choco install firefox -y
 choco install googlechrome -y
