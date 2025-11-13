@@ -4,14 +4,15 @@
     {
       "type": "prompt",
       "alignment": "left",
+      "leading_diamond": "\ue0b6",
+      "trailing_diamond": "\ue0b4",
       "segments": [
         {
           "properties": {
             "cache_duration": "none",
             "style": "agnoster_short"
           },
-          "leading_diamond": "\ue0b6",
-          "template": " \uea83 {{ .Path }} {{ if and (not .Segments.Git) (not .Segments.Root) }}<#c17e1a,transparent>\ue0b4</>{{ end }}",
+          "template": " \uea83 {{ .Path }}",
           "foreground": "#ffffff",
           "background": "#c17e1a",
           "type": "path",
@@ -21,12 +22,11 @@
           "properties": {
             "cache_duration": "none"
           },
-          "template": " \uf0e7 ",
+          "template": "<parentBackground,background>\ue0b0</> \uf0e7 ",
           "foreground": "#ffffff",
           "background": "#ff009d",
           "type": "root",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b0"
+          "style": "diamond"
         },
         {
           "properties": {
@@ -35,12 +35,11 @@
             "fetch_status": true,
             "fetch_upstream_icon": true
           },
-          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<#ef5350> \uf046 {{ .Staging.String }}</>{{ end }} ",
+          "template": "<parentBackground,background>\ue0b0</> {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<#ef5350> \uf046 {{ .Staging.String }}</>{{ end }} ",
           "foreground": "#011627",
           "background": "#FFFB38",
           "type": "git",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b0",
+          "style": "diamond",
           "background_templates": [
             "{{ if or (.Working.Changed) (.Staging.Changed) }}#ffeb95{{ end }}",
             "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#c5e478{{ end }}",
@@ -52,48 +51,44 @@
           "properties": {
             "cache_duration": "none"
           },
-          "template": " \ue70c {{ .Full }} ",
+          "template": "<parentBackground,background>\ue0b0</> \ue70c {{ .Full }} ",
           "foreground": "#ffffff",
           "background": "#6CA35E",
           "type": "dotnet",
-          "style": "diamond",
-          "trailing_diamond": "\ue0b4"
+          "style": "diamond"
         },
         {
           "properties": {
             "cache_duration": "none",
             "fetch_version": true
           },
-          "template": " \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
+          "template": "<parentBackground,background>\ue0b0</> \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
           "foreground": "#ffffff",
           "background": "#6CA35E",
           "type": "node",
-          "style": "diamond",
-          "trailing_diamond": "\ue0b4"
+          "style": "diamond"
         },
         {
           "properties": {
             "cache_duration": "none",
             "fetch_version": true
           },
-          "template": " \ue626 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "template": "<parentBackground,background>\ue0b0</> \ue626 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
           "foreground": "#111111",
           "background": "#8ED1F7",
           "type": "go",
-          "style": "diamond",
-          "trailing_diamond": "\ue0b4"
+          "style": "diamond"
         },
         {
           "properties": {
             "cache_duration": "none",
             "fetch_version": true
           },
-          "template": " \ue624 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "template": "<parentBackground,background>\ue0b0</> \ue624 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
           "foreground": "#111111",
           "background": "#4063D8",
           "type": "julia",
-          "style": "diamond",
-          "trailing_diamond": "\ue0b4"
+          "style": "diamond"
         },
         {
           "properties": {
@@ -101,12 +96,11 @@
             "display_mode": "files",
             "fetch_virtual_env": false
           },
-          "template": " \ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "template": "<parentBackground,background>\ue0b0</> \ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
           "foreground": "#111111",
           "background": "#FFDE57",
           "type": "python",
-          "style": "diamond",
-          "trailing_diamond": "\ue0b4"
+          "style": "diamond"
         },
         {
           "properties": {
@@ -114,12 +108,11 @@
             "display_mode": "files",
             "fetch_version": true
           },
-          "template": " \ue791 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "template": "<parentBackground,background>\ue0b0</> \ue791 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
           "foreground": "#ffffff",
           "background": "#AE1401",
           "type": "ruby",
-          "style": "diamond",
-          "trailing_diamond": "\ue0b4"
+          "style": "diamond"
         },
         {
           "properties": {
@@ -127,20 +120,20 @@
             "display_mode": "files",
             "fetch_version": false
           },
-          "template": " \uf0e7{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "template": "<parentBackground,background>\ue0b0</> \uf0e7{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
           "foreground": "#ffffff",
           "background": "#FEAC19",
           "type": "azfunc",
-          "style": "diamond",
-          "trailing_diamond": "\ue0b4"
+          "style": "diamond"
         },
         {
           "properties": {
             "cache_duration": "none",
             "display_default": false
           },
-          "template": " \ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} ",
-          "foreground": "#ffffff",
+          "template": "<parentBackground,background>\ue0b0</> \ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} ",
+          "foreground": "#000000",
+          "background": "#ffffff",
           "type": "aws",
           "style": "diamond",
           "background_templates": [
