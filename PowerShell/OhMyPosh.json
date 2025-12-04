@@ -12,7 +12,7 @@
             "cache_duration": "none",
             "style": "agnoster_short"
           },
-          "template": " \uea83 {{ .Path }}",
+          "template": " \uea83 {{ .Path }} ",
           "foreground": "#ffffff",
           "background": "#c17e1a",
           "type": "path",
