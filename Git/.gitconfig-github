@@ -1,12 +1,10 @@
 [commit]
     gpgsign = true
+[gpg]
+	format = ssh
 [user]
     name = mu88
     email = 4560672+mu88@users.noreply.github.com
-    # Install key
-    # Run "gpg --list-secret-keys"
-    # Run "gpg --edit-key <<GitHub Key>>"
-    # Grab the 16 char long ID "BLABLUBTRALALALA" of the entry "sec  rsa4096/BLABLUBTRALALALA"
-    signingkey = 22DC58317AC29D13
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIElEyYsiaLEEiMvzfcXCJ6VMTx9Q95uDAlTk/D6DryKy
 [credential "https://github.com"]
     username = mu88

@@ -2,10 +2,13 @@
 
 # Kudos to https://stackoverflow.com/a/65963666/4919526
 
+Write-Host "When running on Windows, do not forget to configure 'core.sshCommand' and 'gpg.ssh.program' when signing Git commits via Bitwarden SSH Agent (see https://bitwarden.com/help/ssh-agent/#configure-git-for-ssh-signing)."
+
 $gitDirectory = $PSScriptRoot
 $configs = @{
     "core.hooksPath" = Join-Path $gitDirectory "hooks"
     "include.path" = Join-Path $gitDirectory ".gitconfig"
+    "gpg.ssh.allowedSignersFile" = Join-Path $gitDirectory ".ssh" "allowedSigners"
 }
 
 Write-Host "Setting GIT_CONFIG_COUNT to $($configs.Count)"
