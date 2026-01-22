@@ -7,6 +7,7 @@ if (!$env:WT_SESSION) {
 
 Import-Module posh-git
 Import-Module -Name Terminal-Icons
+Import-Module PSReadLine
 
 # See https://github.com/JanDeDobbeleer/oh-my-posh/issues/6535#issuecomment-3077804893
 $env:OSTYPE = $null
