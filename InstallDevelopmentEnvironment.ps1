@@ -19,7 +19,7 @@ choco install nodejs -y
 choco install dotnet-sdk -y
 choco install notepadplusplus -y
 choco install vscode -y
-choco install visualstudio2022professional -y --params "--locale en-US"
+choco install visualstudio2026professional -y --params "--locale en-US"
 choco install jetbrainstoolbox -y # consider adding '--ia "/D=C:\new\path"' as otherwise the toolbox will be installed to %LOCALAPPDATA%
 
 # Additional development tools
