@@ -13,6 +13,12 @@ function Get-GitHubToken {
 	return $token
 }
 
+function Disable-Projects {
+	param($repo)
+	Write-Host "Disabling Projects..."
+	gh api -X PATCH "/repos/$repo" -f has_projects=false
+}
+
 function Disable-Wiki {
 	param($repo)
 	Write-Host "Disabling Wikis..."
@@ -105,6 +111,8 @@ if (-not (Get-Command gh -ErrorAction SilentlyContinue)) {
 	exit 1
 }
 
+Ask-EnableRenovate
+Disable-Projects $repo
 Disable-Wiki $repo
 Enable-Issues $repo
 Enable-Discussions $repo
@@ -113,6 +121,5 @@ Enable-UpdateBranchSuggestion $repo
 Enable-AutoMerge $repo
 Enable-DeleteHeadBranches $repo
 Configure-Rulesets $repo
-Ask-EnableRenovate
 Ask-CreateSonarToken $repo
 
