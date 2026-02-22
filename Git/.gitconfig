@@ -1,10 +1,3 @@
-[includeIf "gitdir:**/GitHub/"]
-    path = .gitconfig-github
-[core]
-    autocrlf = true
-    longpaths = true
-[i18n]
-    filesEncoding = utf-8
 [alias]
     # Find feature branch from ticket number
     fb = "!f() { git branch -a | grep ""feature/.*$1.*"" | sed 's/remotes.//' | sed 's/origin.//' | sort -u; }; f"
@@ -46,5 +39,18 @@
         git tag -a $tag_name -m \"$tag_name\" $new_commit; \
         echo \"Tag $tag_name moved to new commit $new_commit.\"; \
     }; f"
+[core]
+    autocrlf = true
+    longpaths = true
 [credential]
     helper = wincred
+[fetch]
+    prune = true
+[i18n]
+    filesEncoding = utf-8
+[includeIf "gitdir:**/GitHub/"]
+    path = .gitconfig-github
+[pull]
+    rebase = true
+[rebase]
+    autoStash = true
