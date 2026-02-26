@@ -1,9 +1,9 @@
-Push-Location $PSScriptRoot
-
 # Run only in Windows Terminal as other terminals might not properly support other PowerShell modules and screw up the formatting
 if (!$env:WT_SESSION) {
     return
 }
+
+Push-Location $PSScriptRoot
 
 Import-Module posh-git
 Import-Module -Name Terminal-Icons
