@@ -6,8 +6,32 @@ if (!$env:WT_SESSION) {
 Push-Location $PSScriptRoot
 
 Import-Module posh-git
-Import-Module -Name Terminal-Icons
 Import-Module PSReadLine
+
+# See https://github.com/devblackops/Terminal-Icons/issues/126
+$terminalIconsFolder = "$env:APPDATA\powershell\Community\Terminal-Icons"
+$maxAttempts = 5
+$delayMs = 500
+$attempts = 0
+while ($attempts -lt $maxAttempts) {
+    $attempts++
+    try {
+        if (Test-Path $terminalIconsFolder){
+            Remove-Item $terminalIconsFolder -Recurse
+        }
+        break
+    }
+    catch {
+        if ($attempts -lt $maxAttempts) {
+            Start-Sleep -Milliseconds $delayMs
+        }
+        else {
+            throw
+        }
+    }
+}
+
+Import-Module -Name Terminal-Icons
 
 # See https://github.com/JanDeDobbeleer/oh-my-posh/issues/6535#issuecomment-3077804893
 $env:OSTYPE = $null
