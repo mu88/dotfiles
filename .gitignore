@@ -1,0 +1,5 @@
+# Git LFS auto-generated hooks
+Git/hooks/post-checkout
+Git/hooks/post-commit
+Git/hooks/post-merge
+Git/hooks/pre-push
