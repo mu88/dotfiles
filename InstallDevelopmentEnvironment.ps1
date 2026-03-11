@@ -14,6 +14,9 @@ choco install winmerge -y
 choco install gitextensions -y
 choco install gh -y
 
+# AI
+choco install github-copilot-cli -y
+
 # IDE and essential development
 choco install nodejs -y
 choco install dotnet-sdk -y
@@ -23,6 +26,8 @@ choco install visualstudio2026professional -y --params "--locale en-US --add Mic
 choco install jetbrainstoolbox -y # consider adding '--ia "/D=C:\new\path"' as otherwise the toolbox will be installed to %LOCALAPPDATA%
 
 # Additional development tools
+choco install act-cli -y
+choco install msbuild-structured-log-viewer -y
 choco install nunit-console-runner -y
 choco install nuget.commandline -y
 choco install nugetpackageexplorer -y
@@ -32,7 +37,8 @@ choco install microsoft-windows-terminal -y
 choco install powershell-core -y
 choco install firacode -y
 choco install firacodenf -y
-choco install oh-my-posh
+choco install oh-my-posh -y
+choco install terminal-icons.powershell -y
 
 # Web development / network analysis
 choco install fiddler -y
@@ -43,6 +49,9 @@ choco install winpcap -y
 # Cloud tools
 choco install awscli -y
 choco install kustomize -y
+choco install az.powershell -y
+choco install azd -y
+choco install azure-cli -y
 
 # Database Tools
 choco install sql-server-management-studio -y
@@ -74,4 +83,3 @@ choco install stretchly -y
 
 Install-Module PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck
 Install-Module posh-git -Scope CurrentUser
-Install-Module Terminal-Icons -Repository PSGallery
