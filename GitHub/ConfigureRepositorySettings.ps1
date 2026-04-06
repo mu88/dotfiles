@@ -66,14 +66,27 @@ function Configure-Rulesets {
 	$rulesetsPath = Join-Path $PSScriptRoot 'Rulesets'
 	if (Test-Path $rulesetsPath) {
 		$token = Get-GitHubToken
+		$headers = @{ Authorization = "token $token"; Accept = "application/vnd.github+json" }
+
+		# Fetch existing rulesets once so we can upsert by name
+		$existingRulesets = Invoke-RestMethod -Uri "https://api.github.com/repos/$repo/rulesets" -Headers $headers -Method Get -ErrorAction Stop
+
 		Get-ChildItem -Path $rulesetsPath -Filter *.json | ForEach-Object {
 			$rulesetJson = Get-Content $_.FullName -Raw
-			Write-Host "Applying ruleset: $($_.Name) ..."
-			$uri = "https://api.github.com/repos/$repo/rulesets"
-			$headers = @{ Authorization = "token $token"; Accept = "application/vnd.github+json" }
-			$body = $rulesetJson
-			$response = Invoke-RestMethod -Uri $uri -Headers $headers -Method Post -Body $body -ContentType 'application/json' -ErrorAction Stop
-			Write-Host "Ruleset $($_.Name) applied."
+			$rulesetName = ($rulesetJson | ConvertFrom-Json).name
+			$existing = $existingRulesets | Where-Object { $_.name -eq $rulesetName } | Select-Object -First 1
+
+			if ($existing) {
+				Write-Host "Updating existing ruleset: $rulesetName (id=$($existing.id)) ..."
+				$uri = "https://api.github.com/repos/$repo/rulesets/$($existing.id)"
+				Invoke-RestMethod -Uri $uri -Headers $headers -Method Put -Body $rulesetJson -ContentType 'application/json' -ErrorAction Stop | Out-Null
+				Write-Host "Ruleset '$rulesetName' updated."
+			} else {
+				Write-Host "Creating new ruleset: $rulesetName ..."
+				$uri = "https://api.github.com/repos/$repo/rulesets"
+				Invoke-RestMethod -Uri $uri -Headers $headers -Method Post -Body $rulesetJson -ContentType 'application/json' -ErrorAction Stop | Out-Null
+				Write-Host "Ruleset '$rulesetName' created."
+			}
 		}
 	} else {
 		Write-Warning "Rulesets folder not found. Skipping ruleset configuration."

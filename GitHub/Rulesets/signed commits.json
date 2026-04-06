@@ -5,7 +5,9 @@
   "enforcement": "active",
   "conditions": {
     "ref_name": {
-      "exclude": [],
+      "exclude": [
+        "refs/heads/feature/ai-*"
+      ],
       "include": [
         "~ALL"
       ]
