@@ -72,7 +72,7 @@
         "defaults":
         {
             "autoMarkPrompts": true,
-            "backgroundImage": "%USERPROFILE%\\Documents\\Development\\Background.JPG",
+            "backgroundImage": "%MU88_DOTFILES%\\WindowsTerminal\\BACKGROUND.JPG",
             "backgroundImageOpacity" : 0.2,
             "font": {
                 "face": "FiraCode NF",
@@ -92,6 +92,10 @@
                 "icon": "%USERPROFILE%\\Documents\\Development\\PowerShell_Core_6.0_icon.png"
             },
             {
+                // Use Code.exe via PATH because Copilot CLI on Windows does not reliably handle code.cmd as external editor - see https://github.com/github/copilot-cli/issues/1882
+                "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
+                "EDITOR": "Code.exe --wait",
+                "VISUAL": "Code.exe --wait",
                 "commandline": "copilot",
                 "guid": "{56dd48c0-19b5-4b7e-9623-8707cbac2437}",
                 "name": "GitHub Copilot CLI",
