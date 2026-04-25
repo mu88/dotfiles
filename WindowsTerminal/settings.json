@@ -93,21 +93,21 @@
             },
             {
                 // Use Code.exe via PATH because Copilot CLI on Windows does not reliably handle code.cmd as external editor - see https://github.com/github/copilot-cli/issues/1882
-                "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
-                "EDITOR": "Code.exe --wait",
-                "VISUAL": "Code.exe --wait",
+                "environment": 
+                {
+                    "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
+                    "EDITOR": "Code.exe --wait",
+                    "VISUAL": "Code.exe --wait"
+                    // If you use a company proxy, uncomment these entries and run px proxy locally.
+                    // ,"NODE_USE_ENV_PROXY": "1"
+                    // ,"NODE_USE_SYSTEM_CA": "1"
+                    // ,"HTTPS_PROXY": "http://localhost:3128"
+                    // ,"HTTP_PROXY": "http://localhost:3128"
+                },
                 "commandline": "copilot",
                 "guid": "{56dd48c0-19b5-4b7e-9623-8707cbac2437}",
                 "name": "GitHub Copilot CLI",
                 "icon": "🤖"
-                // If you use a company proxy, uncomment this block and run px proxy locally.
-                // ,"environment":
-                // {
-                //     "NODE_USE_ENV_PROXY": "1",
-                //     "NODE_USE_SYSTEM_CA": "1",
-                //     "HTTPS_PROXY": "http://localhost:3128",
-                //     "HTTP_PROXY": "http://localhost:3128"
-                // }
             },
             {
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
