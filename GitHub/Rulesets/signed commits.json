@@ -20,7 +20,7 @@
   ],
   "bypass_actors": [
     {
-      "actor_id": 2740,
+      "actor_id": 3498920,
       "actor_type": "Integration",
       "bypass_mode": "always"
     }

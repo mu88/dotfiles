@@ -96,8 +96,8 @@ function Configure-Rulesets {
 function Ask-EnableRenovate {
 	$enableRenovate = Read-Host "Do you want to enable Renovate for this repository? (y/n)"
 	if ($enableRenovate -eq 'y') {
-		Write-Host "Navigate to https://github.com/settings/installations/29694880 to enable Renovate."
-		Start-Process "https://github.com/settings/installations/29694880"
+		Write-Host "Navigate to https://github.com/settings/installations/126957733 to enable Renovate."
+		Start-Process "https://github.com/settings/installations/126957733"
 	}
 }
 
