@@ -8,12 +8,45 @@ applyTo: "**"
 - **NEVER commit to or push `main`/`master` directly.** Always work on a feature branch.
 - **NEVER install tools or plugins without explicit user consent.** This includes linters, formatters, Python, PowerShell, Node.js, .NET, and any extensions. Always ask first.
 - **During interactive sessions:** leave changes uncommitted for user review unless explicitly asked to commit.
-- **On `feature/ai-*` branches (autonomous work):** commit with `--no-gpg-sign` (these branches are exempt from the signed-commits policy; signing will fail without a configured key). Amend/force-push commits when a change belongs to a previous commit semantically. Squash to clean, semantic commits before handing off for review.
-- Commit messages follow **Conventional Commits**. The body explains **why** — the diff shows what and how. Body: 2–3 lines max, no bullet lists, no file inventories. If the "why" is unclear, ask rather than pad the message.
+- **On `feature/ai-*` branches (autonomous work):** always use a dedicated Git worktree for your work and clean it up (i.e. remove) after you're done. Commit with `--no-gpg-sign` (these branches are exempt from the signed-commits policy; signing will fail without a configured key). Amend/force-push commits when a change belongs to a previous commit semantically. Squash to clean, semantic commits before handing off for review.
+- Commit messages follow **Conventional Commits**. The body MUST EXPLAIN **why** — the diff shows what and how. Body: 2–3 lines max, no bullet lists, no file inventories. If the "why" is unclear, ask rather than pad the message. The same rules MUST be followed for PR descriptions.
 
 ## Workspace & Tools
+- When it comes to Git commit signing, Bitwarden's SSH agent is the only supported option.
 - Before concluding that `gh` cannot perform a GitHub operation, check whether `gh api` with the appropriate REST endpoint or GraphQL mutation can achieve it. `gh <command>` covers only common operations; the full API surface is accessible via `gh api`.
-- Example: `gh pr comment` only creates top-level PR comments. Replying to a review thread requires `gh api .../pulls/comments/{id}/replies`; resolving a thread requires a GraphQL mutation (`resolveReviewThread`).
+  - Example: `gh pr comment` only creates top-level PR comments. Replying to a review thread requires `gh api .../pulls/comments/{id}/replies`; resolving a thread requires a GraphQL mutation (`resolveReviewThread`).
+
+Always check whether a Git repo already exists locally before cloning. If it does, use the existing local copy instead of cloning again and pull the latest changes.
+
+When working with Git worktrees, you MUST make sure to place them in the separate directory `__worktrees__` under the Git root directory (e.g. `D:\work\GitHubEnterprise\__worktrees__`) to avoid messing with the Git root directory specific Git configuration. For example, `D:\work\GitHubEnterprise` uses a different Git account than `D:\work\GitHub`, so worktrees for GitHub repos MUST NOT be created under `D:\work\GitHubEnterprise` to avoid accidentally inheriting the wrong Git configuration. Always check for existing worktrees before creating a new one, and always clean up (i.e. remove) worktrees after you're done with them.
+
+### Pull Requests & Code Reviews
+- When filing PRs, also check for existing PR templates and incorporate them if present, together with the above rules. Also ensure that the PR descriptions are properly formatted, e.g. contain no escaping issues. After filing the PR, verify that the description appears as intended on GitHub and edit if necessary to fix formatting issues.
+- As long as your filed PRs are still in draft status, always make sure that you're up to date with the base branch (e.g. `main`) by regularly rebasing on the latest commits from the base branch.
+- Do not mention edited files in the PR description if they are not relevant to the reviewer's focus - the diff itself shows what files are changed.
+- **Markdown bodies for `gh` commands (PR/issue descriptions, comments):** ALWAYS write the body to a temp file and pass it via `--body-file`. Never pass Markdown directly as a string argument — backticks, newlines, and special characters in Markdown routinely cause silent corruption in PowerShell string handling. Pattern:
+  ```powershell
+  $body = @'
+  ...markdown content...
+  '@   # ALWAYS use single-quoted @'...'@ — double-quoted @"..."@ interprets backticks as
+       # escape sequences (`r → CR, `n → LF), which corrupts triple backticks in code fences.
+
+  $bodyFile = [System.IO.Path]::GetTempFileName()
+  try {
+      Set-Content -Path $bodyFile -Value $body -Encoding utf8NoBOM
+      gh pr create --body-file $bodyFile ...
+  } finally {
+      Remove-Item -Path $bodyFile -ErrorAction SilentlyContinue
+  }
+  ```
+  This applies to `gh pr create`, `gh pr edit`, `gh issue create`, `gh issue edit`, `gh pr comment`, `gh issue comment`, and any other `gh` command that accepts a body/message.
+- **Angle brackets in Markdown bodies:** GitHub's API strips `<word>` patterns (e.g. `<sha>`, `<tag>`) even inside fenced code blocks. Use `&lt;` / `&gt;` for literal angle brackets, or avoid `<placeholder>` style entirely and use `{placeholder}` instead.
+- **Dynamic content in bodies:** `@'...'@` does not expand variables. If the body needs dynamic content, build it via string concatenation — do NOT switch to `@"..."@` just to get variable expansion, as that re-introduces the backtick corruption problem.
+  ```powershell
+  $body = @'
+  PR for branch: '@ + $branchName + @'
+  See: '@ + $url
+  ```
 
 ## Communication
 - Communicate with the user in **German** — explanations, questions, summaries, all in German.
