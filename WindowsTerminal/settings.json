@@ -89,7 +89,7 @@
                 "name": "PS Core / GitHub",
                 "commandline": "pwsh.exe",
                 "startingDirectory": "%USERPROFILE%\\Documents\\Development\\source\\GitHub",
-                "icon": "%USERPROFILE%\\Documents\\Development\\PowerShell_Core_6.0_icon.png"
+                "icon": "ms-appx:///ProfileIcons/pwsh.png"
             },
             {
                 // Use Code.exe via PATH because Copilot CLI on Windows does not reliably handle code.cmd as external editor - see https://github.com/github/copilot-cli/issues/1882
@@ -118,7 +118,7 @@
                 "commandline": "pwsh.exe",
                 "guid": "{d2a943f4-5a90-4a3f-9fc0-8225ba077b20}",
                 "name": "🛡 PS Core (elevated)",
-                "icon": "%USERPROFILE%\\Documents\\Development\\PowerShell_Core_6.0_icon.png",
+                "icon": "ms-appx:///ProfileIcons/pwsh.png",
                 "elevate": true
             },
             {
