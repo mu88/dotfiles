@@ -5,9 +5,6 @@ description: 'PowerShell cmdlet and scripting best practices based on Microsoft 
 
 # PowerShell Cmdlet Development Guidelines
 
-This guide provides PowerShell-specific instructions to help GitHub Copilot generate idiomatic,
-safe, and maintainable scripts. It aligns with Microsoft’s PowerShell cmdlet development guidelines.
-
 ## Naming Conventions
 
 - **Verb-Noun Format:**
@@ -38,19 +35,8 @@ safe, and maintainable scripts. It aligns with Microsoft’s PowerShell cmdlet d
 
 ```powershell
 function Get-UserProfile {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory)]
-        [string]$Username,
-
-        [Parameter()]
-        [ValidateSet('Basic', 'Detailed')]
-        [string]$ProfileType = 'Basic'
-    )
-
-    process {
-        # Logic here
-    }
+    param([Parameter(Mandatory)] [string]$Username)
+    # Logic
 }
 ```
 
@@ -59,7 +45,7 @@ function Get-UserProfile {
 - **Standard Parameters:**
   - Use common parameter names (`Path`, `Name`, `Force`)
   - Follow built-in cmdlet conventions
-  - Use aliases for specialized terms
+  - Use [Alias()] attributes on parameters only when a well-known domain-specific name exists (e.g., `[Alias('ComputerName')]`). Never use cmdlet aliases in script bodies.
   - Document parameter purpose
 
 - **Parameter Names:**
@@ -84,26 +70,12 @@ function Get-UserProfile {
 
 ```powershell
 function Set-ResourceConfiguration {
-    [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [string]$Name,
-
-        [Parameter()]
-        [ValidateSet('Dev', 'Test', 'Prod')]
-        [string]$Environment = 'Dev',
-
-        [Parameter()]
-        [switch]$Force,
-
-        [Parameter()]
-        [ValidateNotNullOrEmpty()]
-        [string[]]$Tags
+        [Parameter(Mandatory)] [string]$Name,
+        [ValidateSet('Dev', 'Prod')] [string]$Env = 'Dev',
+        [switch]$Force
     )
-
-    process {
-        # Logic here
-    }
+    # Logic
 }
 ```
 
@@ -137,44 +109,13 @@ function Set-ResourceConfiguration {
 
 ```powershell
 function Update-ResourceStatus {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-        [string]$Name,
-
-        [Parameter(Mandatory)]
-        [ValidateSet('Active', 'Inactive', 'Maintenance')]
-        [string]$Status,
-
-        [Parameter()]
-        [switch]$PassThru
-    )
-
-    begin {
-        Write-Verbose 'Starting resource status update process'
-        $timestamp = Get-Date
-    }
-
+    param([Parameter(Mandatory, ValueFromPipeline)] [string]$Name, [string]$Status)
+    begin { $timestamp = Get-Date }
     process {
-        # Process each resource individually
-        Write-Verbose "Processing resource: $Name"
-
-        $resource = [PSCustomObject]@{
-            Name        = $Name
-            Status      = $Status
-            LastUpdated = $timestamp
-            UpdatedBy   = $env:USERNAME
-        }
-
-        # Only output if PassThru is specified
-        if ($PassThru.IsPresent) {
-            Write-Output $resource
-        }
+        $resource = [PSCustomObject]@{ Name = $Name; Status = $Status; Updated = $timestamp }
+        Write-Output $resource
     }
-
-    end {
-        Write-Verbose 'Resource status update process completed'
-    }
+    end { }
 }
 ```
 
@@ -214,71 +155,23 @@ function Update-ResourceStatus {
 ```powershell
 function Remove-UserAccount {
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    param(
-        [Parameter(Mandatory, ValueFromPipeline)]
-        [ValidateNotNullOrEmpty()]
-        [string]$Username,
-
-        [Parameter()]
-        [switch]$Force
-    )
-
-    begin {
-        Write-Verbose 'Starting user account removal process'
-        $ErrorActionPreference = 'Stop'
-    }
-
+    param([Parameter(Mandatory)] [string]$Username, [switch]$Force)
     process {
         try {
-            # Validation
-            if (-not (Test-UserExists -Username $Username)) {
-                $errorRecord = [System.Management.Automation.ErrorRecord]::new(
-                    [System.Exception]::new("User account '$Username' not found"),
-                    'UserNotFound',
-                    [System.Management.Automation.ErrorCategory]::ObjectNotFound,
-                    $Username
-                )
-                $PSCmdlet.WriteError($errorRecord)
-                return
-            }
-
-            # Confirmation
-            $shouldProcessMessage = "Remove user account '$Username'"
-            if ($Force -or $PSCmdlet.ShouldProcess($Username, $shouldProcessMessage)) {
-                Write-Verbose "Removing user account: $Username"
-
-                # Main operation
+            if ($Force -or $PSCmdlet.ShouldProcess($Username, 'Remove account')) {
                 Remove-ADUser -Identity $Username -ErrorAction Stop
-                Write-Warning "User account '$Username' has been removed"
             }
-        } catch [Microsoft.ActiveDirectory.Management.ADException] {
-            $errorRecord = [System.Management.Automation.ErrorRecord]::new(
-                $_.Exception,
-                'ActiveDirectoryError',
-                [System.Management.Automation.ErrorCategory]::NotSpecified,
-                $Username
-            )
-            $PSCmdlet.ThrowTerminatingError($errorRecord)
         } catch {
-            $errorRecord = [System.Management.Automation.ErrorRecord]::new(
-                $_.Exception,
-                'UnexpectedError',
-                [System.Management.Automation.ErrorCategory]::NotSpecified,
-                $Username
+            $err = [System.Management.Automation.ErrorRecord]::new(
+                $_.Exception, 'RemovalFailed', 'NotSpecified', $Username
             )
-            $PSCmdlet.ThrowTerminatingError($errorRecord)
+            $PSCmdlet.ThrowTerminatingError($err)
         }
-    }
-
-    end {
-        Write-Verbose 'User account removal process completed'
     }
 }
 ```
 
 ## Documentation and Style
-
-- Don't be overly verbose in your code comments - only use them rarely when really necessary. Instead, focus on writing self-explanatory code with clear variable and function names that convey their purpose and functionality. This approach promotes readability and maintainability without cluttering the code with excessive comments.
 
 - **Comment-Based Help:** Include comment-based help for any public-facing function or cmdlet. Inside the function, add a `<# ... #>` help comment with at least:
   - `.SYNOPSIS` Brief description
@@ -310,58 +203,12 @@ function Remove-UserAccount {
   - Use `ForEach-Object` instead of `%`
   - Use `Get-ChildItem` instead of `ls` or `dir`
 
-## Full Example: End-to-End Cmdlet Pattern
-
-```powershell
-function New-Resource {
-    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
-    param(
-        [Parameter(Mandatory = $true,
-            ValueFromPipeline = $true,
-            ValueFromPipelineByPropertyName = $true)]
-        [ValidateNotNullOrEmpty()]
-        [string]$Name,
-
-        [Parameter()]
-        [ValidateSet('Development', 'Production')]
-        [string]$Environment = 'Development'
-    )
-
-    begin {
-        Write-Verbose 'Starting resource creation process'
-    }
-
-    process {
-        try {
-            if ($PSCmdlet.ShouldProcess($Name, 'Create new resource')) {
-                # Resource creation logic here
-                Write-Output ([PSCustomObject]@{
-                        Name        = $Name
-                        Environment = $Environment
-                        Created     = Get-Date
-                    })
-            }
-        } catch {
-            $errorRecord = [System.Management.Automation.ErrorRecord]::new(
-                $_.Exception,
-                'ResourceCreationFailed',
-                [System.Management.Automation.ErrorCategory]::NotSpecified,
-                $Name
-            )
-            $PSCmdlet.ThrowTerminatingError($errorRecord)
-        }
-    }
-
-    end {
-        Write-Verbose 'Completed resource creation process'
-    }
-}
-```
-
 ## Others
 
-- Always use English for variable and function names, as well as comments, to ensure that the code is accessible and understandable to a wider audience of developers.
-- Try to use GitHub CLI when interacting with GitHub resources (e.g., issues, pull requests) to ensure proper authentication and API usage. For token usage, use `gh auth token` to retrieve the token securely.
-- Set `$ErrorActionPreference = "Stop"` at the beginning of your scripts to ensure that any errors are treated as terminating errors, allowing for proper error handling and debugging.
-- If native commands are used, set `$PSNativeCommandUseErrorActionPreference = $true` at the beginning of your scripts to ensure that errors from native commands are also treated as terminating errors.
+- Use English for all names and comments.
+- Use GitHub CLI for GitHub resources; retrieve token via `gh auth token`.
+- Set `$ErrorActionPreference = "Stop"` at script start.
+- If the script invokes any external executables (non-PowerShell binaries, e.g. git, curl, dotnet): set `$PSNativeCommandUseErrorActionPreference = $true` immediately after `$ErrorActionPreference = "Stop"`.
+- **Never use `Set-StrictMode -Version Latest` in scripts that process JSON API responses or external data.** It throws `PropertyNotFoundException` when accessing absent properties on `PSCustomObject` — which is common with optional JSON fields. `$ErrorActionPreference = 'Stop'` alone is sufficient.
+- **Backtick escape sequences in double-quoted strings:** In `"..."`, backtick is the escape character. Several combinations produce invisible control characters: `` `a `` (BEL/bell), `` `b `` (backspace), `` `f `` (form feed), `` `v `` (vertical tab). This is a silent bug — the string appears correct in source but outputs a control character at runtime. Rule: use single-quoted strings `'...'` whenever the string contains literal backticks (e.g. Markdown code spans). If variable interpolation is required, use ` `` ` (two backticks) for a literal backtick, and avoid placing a backtick immediately before any of the letters `a b f n r t u v 0`.
 - Apply all standards to **every code change**, including refactorings and partial edits – not only to new scripts.

@@ -12,7 +12,7 @@ applyTo: "**/*.cs, **/*.razor, **/*.csproj, **/*.sln, **/*.slnx, **/*.props, **/
 - Read `*.DotSettings` for JetBrains Rider-specific code style and inspection settings and also check for referenced settings files.
 - Use `dotnet-coverage` (from .NET tool manifest) for coverage collection, NOT `coverlet`.
 - Use `dotnet-sonarscanner` (from .NET tool manifest) for SonarQube/SonarCloud analysis.
-- Your training data may not include the .NET and C# version this project uses. When the detected version is likely newer than your training cutoff, consult the official "What's New" documentation before implementing: `https://learn.microsoft.com/dotnet/core/whats-new/dotnet-{version}/overview` for runtime and BCL changes, and `https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-{version}` for language features. Prefer new idiomatic APIs and language constructs over patterns you know from older versions.
+- Your training data may not include the .NET and C# version this project uses. Consult `https://learn.microsoft.com/dotnet/core/whats-new/dotnet-{version}/overview` (runtime/BCL) and `https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-{version}` (language features) when needed; prefer new idiomatic APIs over older patterns.
 
 ## Entity Design
 - Entities: `class` with a public constructor for required fields and `private set` on all
@@ -33,14 +33,14 @@ applyTo: "**/*.cs, **/*.razor, **/*.csproj, **/*.sln, **/*.slnx, **/*.props, **/
 
 ## Collections
 - Use `IEnumerable<T>` when only iterating. Use `IReadOnlyList<T>` only when `Count` or indexer access is needed.
-- Remove unnecessary `.ToList()` / `.ToArray()` calls — EF Core and serialization work with `IEnumerable<T>`.
+- Remove unnecessary `.ToList()` / `.ToArray()` calls — EF Core and serialization work with `IEnumerable<T>`. Exception: materializing to `.ToList()` is acceptable when a method must return `IReadOnlyList<T>` or when a collection is iterated multiple times.
 
 ## Testing
 - Framework: NUnit + FluentAssertions + NSubstitute.
 - Every test method MUST have `// Arrange`, `// Act`, `// Assert` comments (AAA pattern).
 - Use `[Category("Unit")]`, `[Category("Integration")]`, or `[Category("System")]` on every test class — CI jobs filter by category.
 - System tests use Testcontainers and require Docker. The container image must be built with `dotnet publish` before running them — derive the exact command, flags, target project, and MSBuild targets from the GitHub Actions workflow (including any referenced shared workflow); never guess or construct the command from defaults.
-- Aim for near-100% coverage on new code. SonarCloud enforces this on the leak period (= all lines changed or added since the last version tag; legacy code is excluded).
+- Aim for ≥90% line and branch coverage on new code (the SonarCloud leak-period gate is the enforced minimum). SonarCloud enforces this on the leak period (= all lines changed or added since the last version tag; legacy code is excluded).
 - Zero new Sonar issues on the leak period is a hard quality gate — do not leave open issues for later.
 - Test all branches: if/else, switch cases, null paths, and error paths. A test that only hits the happy path is insufficient.
 - Write tests for edge cases proactively — empty collections, null inputs, boundary values, concurrent access where applicable.
