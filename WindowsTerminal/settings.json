@@ -104,7 +104,7 @@
                     // ,"HTTPS_PROXY": "http://localhost:3128"
                     // ,"HTTP_PROXY": "http://localhost:3128"
                 },
-                "commandline": "copilot",
+                "commandline": "copilot --no-auto-update",
                 "guid": "{56dd48c0-19b5-4b7e-9623-8707cbac2437}",
                 "name": "GitHub Copilot CLI",
                 "icon": "🤖"
