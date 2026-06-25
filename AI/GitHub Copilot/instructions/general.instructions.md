@@ -10,8 +10,12 @@ applyTo: "**"
 
 ## Mandatory Instructions
 - **NEVER touch the Git config** (globally or per-repo) without explicit user consent. This includes `user.name`, `user.email`, `core.sshCommand`, credential helpers, and `gpg` settings.
-- **NEVER commit to or push `main`/`master` directly.** Always work on a feature branch.
-- **NEVER change branch upstream or tracking settings without explicit user consent.** This includes `git branch --set-upstream-to` and `git push -u`.
+- **NEVER commit to or push `main`/`master` directly, except when EXPLICITLY allowed or instructed.** Always work on a feature branch.
+- **Never set tracking at creation time.** Always-banned commands regardless of user consent: `git push -u`, `git branch --track`, `git checkout --track`, `git switch --track`. Create local branches with `git switch --no-track -c <branch>` (or `git checkout --no-track -b <branch>`).
+- **`git worktree add` must use a local start-point** (commit SHA or local branch ref), never a remote ref or bare remote-tracking branch name. Never set tracking at worktree creation.
+- **Tracking may be set after a push, but only when `origin/<remote>` exactly matches the local branch name** — any mismatch: STOP and report. Never track `origin/main` or `origin/master` from a feature branch — STOP and report.
+- **NEVER use plain `git push`.** Before every push: resolve `$branch = git rev-parse --abbrev-ref HEAD`. If `$branch` is `HEAD` (detached HEAD), STOP and ask. Then check `git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>$null`: if an upstream is configured and its short name does not end with `$branch`, STOP and ask — this is a misconfiguration signal, not an auto-fix opportunity. Push explicitly: `git push origin "${branch}:refs/heads/${branch}"`.
+- **For fetch/rebase, always use explicit names.** Use `git fetch origin <branch>` + `git rebase origin/<branch>`; never rely on implicit upstream resolution.
 - **NEVER install tools or plugins without explicit user consent.** This includes linters, formatters, Python, PowerShell, Node.js, .NET, and any extensions. Always ask first.
 - **During interactive sessions:** leave changes uncommitted for user review unless explicitly asked to commit.
 - **On `feature/ai-*` branches (autonomous work):** always use a dedicated Git worktree for your work and clean it up (i.e. remove) after you're done. Commit with `--no-gpg-sign` (these branches are exempt from the signed-commits policy; signing will fail without a configured key). Amend/force-push commits when a change belongs to a previous commit semantically. Squash to clean, semantic commits before handing off for review. In autonomous (non-interactive) mode only — when invoked interactively on a feature/ai-* branch, the interactive-session rule above takes precedence.
