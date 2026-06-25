@@ -41,6 +41,7 @@ choco install firacode -y
 choco install firacodenf -y
 choco install oh-my-posh -y
 choco install terminal-icons.powershell -y
+choco install psmux -y
 
 # Web development / network analysis
 choco install fiddler -y
