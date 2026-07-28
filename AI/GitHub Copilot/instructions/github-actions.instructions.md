@@ -12,6 +12,10 @@ applyTo: "**/.github/**/*.{yaml,yml}"
   ```
 - For bash steps: `echo "key=value" >> "$GITHUB_OUTPUT"` and `echo "## Summary" >> "$GITHUB_STEP_SUMMARY"`.
 
+## JavaScript Actions
+
+- When implementing JavaScript-based GitHub Actions (`runs.using: node*`), prefer `@actions/core` for inputs, outputs, state, secret masking, and failure handling whenever feasible instead of manual command/env handling.
+
 ## Annotations
 
 - Emit annotations via `Write-Host` (PowerShell) or `echo` (bash):
