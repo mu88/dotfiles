@@ -74,6 +74,13 @@
             "autoMarkPrompts": true,
             "backgroundImage": "%MU88_DOTFILES%\\WindowsTerminal\\BACKGROUND.JPG",
             "backgroundImageOpacity" : 0.2,
+            "environment":
+            {
+            	// Doesn't work yet - see https://github.com/github/copilot-cli/issues/1882
+                "EDITOR": "Code.exe --wait",
+                "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
+                "VISUAL": "Code.exe --wait"
+            },
             "font": {
                 "face": "FiraCode NF",
                 "size": 11
@@ -92,18 +99,18 @@
                 "icon": "ms-appx:///ProfileIcons/pwsh.png"
             },
             {
-                // Use Code.exe via PATH because Copilot CLI on Windows does not reliably handle code.cmd as external editor - see https://github.com/github/copilot-cli/issues/1882
                 "environment": 
                 {
                     "COPILOT_AUTO_UPDATE": "false",
-                    "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
                     "EDITOR": "Code.exe --wait",
+                    "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
                     "VISUAL": "Code.exe --wait"
                     // If you use a company proxy, uncomment these entries and run px proxy locally.
                     // ,"NODE_USE_ENV_PROXY": "1"
                     // ,"NODE_USE_SYSTEM_CA": "1"
                     // ,"HTTPS_PROXY": "http://localhost:3128"
                     // ,"HTTP_PROXY": "http://localhost:3128"
+                    // ,"NO_PROXY": "127.0.0.1,localhost"
                 },
                 "commandline": "copilot --no-auto-update",
                 "guid": "{56dd48c0-19b5-4b7e-9623-8707cbac2437}",
@@ -114,18 +121,61 @@
                 "commandline": "pwsh.exe -NoExit -File \"%MU88_DOTFILES%\\WindowsTerminal\\start-copilot-psmux.ps1\"",
                 "environment":
                 {
-                    "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
+                    "COPILOT_AUTO_UPDATE": "false",
                     "EDITOR": "Code.exe --wait",
+                    "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
                     "VISUAL": "Code.exe --wait"
                     // If you use a company proxy, uncomment these entries and run px proxy locally.
                     // ,"NODE_USE_ENV_PROXY": "1"
                     // ,"NODE_USE_SYSTEM_CA": "1"
                     // ,"HTTPS_PROXY": "http://localhost:3128"
                     // ,"HTTP_PROXY": "http://localhost:3128"
+                    // ,"NO_PROXY": "127.0.0.1,localhost"
                 },
                 "guid": "{c3ea6f06-32d0-4bd4-adbd-1ff3368a8e55}",
                 "name": "GitHub Copilot CLI (psmux)",
                 "icon": "🤖"
+            },
+            {
+                "commandline": "opencode",
+                "environment": 
+                {
+                    "OPENCODE_DISABLE_AUTOUPDATE": "1",
+                    "EDITOR": "Code.exe --wait",
+                    "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
+                    "VISUAL": "Code.exe --wait"
+                    // If you use a company proxy, uncomment these entries and run px proxy locally.
+                    // ,"NODE_USE_ENV_PROXY": "1"
+                    // ,"NODE_USE_SYSTEM_CA": "1"
+                    // ,"HTTPS_PROXY": "http://localhost:3128"
+                    // ,"HTTP_PROXY": "http://localhost:3128"
+                    // ,"NO_PROXY": "127.0.0.1,localhost"
+                },
+                "guid": "{18120438-1c99-4655-8987-d7bef3ae5346}",
+                "hidden": false,
+                "icon": "🧠",
+                "name": "OpenCode CLI"
+            },
+            {
+                "commandline": "pwsh.exe -NoExit -File \"%MU88_DOTFILES%\\WindowsTerminal\\start-opencode-psmux.ps1\"",
+                "environment": 
+                {
+                    "MU88_REQUIRES_GITHUB_TOKEN": "1",
+                    "OPENCODE_DISABLE_AUTOUPDATE": "1",
+                    "EDITOR": "Code.exe --wait",
+                    "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
+                    "VISUAL": "Code.exe --wait"
+                    // If you use a company proxy, uncomment these entries and run px proxy locally.
+                    // ,"NODE_USE_ENV_PROXY": "1"
+                    // ,"NODE_USE_SYSTEM_CA": "1"
+                    // ,"HTTPS_PROXY": "http://localhost:3128"
+                    // ,"HTTP_PROXY": "http://localhost:3128"
+                    // ,"NO_PROXY": "127.0.0.1,localhost"
+                },
+                "guid": "{b85eab0e-078d-4cca-8db8-a1df2677f7f2}",
+                "hidden": false,
+                "icon": "🧠",
+                "name": "OpenCode CLI (psmux)"
             },
             {
                 "commandline": "pwsh.exe -NoExit -File \"%MU88_DOTFILES%\\WindowsTerminal\\attach-copilot-psmux.ps1\"",

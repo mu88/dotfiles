@@ -4,8 +4,7 @@ $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $true
 
 & "$PSScriptRoot\start-tool-psmux.ps1" `
-    -ToolName 'copilot' `
-    -Executable 'copilot' `
-    -EnvPrefix 'COPILOT_' `
-    -Arguments @('--no-auto-update')
+    -ToolName 'opencode' `
+    -Executable 'opencode' `
+    -EnvPrefix 'OPENCODE_'
 exit $LASTEXITCODE

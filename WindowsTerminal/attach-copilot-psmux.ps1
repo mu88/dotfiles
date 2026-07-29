@@ -71,10 +71,6 @@ function Get-SessionDisplayLabel {
 function Invoke-PsmuxSessionChange {
     param([string]$SessionName)
 
-    # TMUX_PANE is set by psmux for every pane process and is NOT stripped (only TMUX is
-    # removed by start-copilot-psmux.ps1 to suppress nested-session warnings). It is the
-    # reliable inside-psmux signal. All ConPTY clients share /dev/pts/0, so attach-session -t
-    # ignores the target and reattaches to the last session — only switch-client works reliably.
     if (-not [string]::IsNullOrWhiteSpace($env:TMUX_PANE)) {
         & psmux switch-client -t $SessionName
         return
@@ -112,11 +108,11 @@ if ($sessionNames.Count -eq 0) {
 # Inside psmux (PSMUX_SESSION set): offer all sessions and use switch-client.
 $insidePsmux = -not [string]::IsNullOrWhiteSpace($env:TMUX_PANE)
 
-$candidateSessions = if ($insidePsmux) {
+$candidateSessions = @(if ($insidePsmux) {
     $sessionNames
 } else {
-    @($sessionNames | Where-Object { -not $attachedSessions.Contains($_) })
-}
+    $sessionNames | Where-Object { -not $attachedSessions.Contains($_) }
+})
 
 if ($candidateSessions.Count -eq 0) {
     Write-Host 'All sessions are currently attached. Use Windows Terminal to navigate to the right tab.'
