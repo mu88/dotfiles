@@ -70,6 +70,7 @@ choco install joplin -y
 choco install keepass -y
 choco install keepass-plugin-kpscript -y
 choco install bitwarden --ia '/allusers' -y
+[Environment]::SetEnvironmentVariable("BITWARDEN_NO_UPDATER", "1", [System.EnvironmentVariableTarget]::User)
 choco install bitwarden-cli --ia '/allusers' -y
 choco install paint.net -y
 choco install pdfcreator -y
