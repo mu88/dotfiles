@@ -115,7 +115,7 @@
                 "commandline": "copilot --no-auto-update",
                 "guid": "{56dd48c0-19b5-4b7e-9623-8707cbac2437}",
                 "name": "GitHub Copilot CLI",
-                "icon": "🤖"
+                "icon": "%MU88_DOTFILES%\\Stuff\\GitHub Copilot White.ico"
             },
             {
                 "commandline": "pwsh.exe -NoExit -File \"%MU88_DOTFILES%\\WindowsTerminal\\start-copilot-psmux.ps1\"",
@@ -134,7 +134,7 @@
                 },
                 "guid": "{c3ea6f06-32d0-4bd4-adbd-1ff3368a8e55}",
                 "name": "GitHub Copilot CLI (psmux)",
-                "icon": "🤖"
+                "icon": "%MU88_DOTFILES%\\Stuff\\GitHub Copilot White.ico"
             },
             {
                 "commandline": "opencode",
@@ -153,7 +153,7 @@
                 },
                 "guid": "{18120438-1c99-4655-8987-d7bef3ae5346}",
                 "hidden": false,
-                "icon": "🧠",
+                "icon": "%MU88_DOTFILES%\\Stuff\\OpenCode White.ico",
                 "name": "OpenCode CLI"
             },
             {
@@ -174,7 +174,7 @@
                 },
                 "guid": "{b85eab0e-078d-4cca-8db8-a1df2677f7f2}",
                 "hidden": false,
-                "icon": "🧠",
+                "icon": "%MU88_DOTFILES%\\Stuff\\OpenCode White.ico",
                 "name": "OpenCode CLI (psmux)"
             },
             {
