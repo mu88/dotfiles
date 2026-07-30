@@ -5,6 +5,5 @@ $PSNativeCommandUseErrorActionPreference = $true
 
 & "$PSScriptRoot\start-tool-psmux.ps1" `
     -ToolName 'opencode' `
-    -Executable 'opencode' `
-    -EnvPrefix 'OPENCODE_'
+    -Executable 'opencode'
 exit $LASTEXITCODE

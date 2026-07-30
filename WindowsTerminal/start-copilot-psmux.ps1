@@ -6,6 +6,5 @@ $PSNativeCommandUseErrorActionPreference = $true
 & "$PSScriptRoot\start-tool-psmux.ps1" `
     -ToolName 'copilot' `
     -Executable 'copilot' `
-    -EnvPrefix 'COPILOT_' `
     -Arguments @('--no-auto-update')
 exit $LASTEXITCODE
