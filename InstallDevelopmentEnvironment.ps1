@@ -9,15 +9,33 @@ choco install tor-browser -y
 
 # Container
 choco install docker-desktop -y
+choco install go-containerregistry -y
 
 # Version Control System
 choco install git -y
 choco install winmerge -y
 choco install gitextensions -y
 choco install gh -y
+gh extension install github/gh-stack
 
 # AI
 choco install github-copilot-cli -y
+copilot skill install github/gh-stack
+copilot plugin marketplace add dotnet/skills
+copilot plugin install dotnet@dotnet-agent-skills
+copilot plugin install dotnet-advanced@dotnet-agent-skills
+copilot plugin install dotnet-ai@dotnet-agent-skills
+copilot plugin install dotnet-aspnetcore@dotnet-agent-skills
+copilot plugin install dotnet-blazor@dotnet-agent-skills
+copilot plugin install dotnet-data@dotnet-agent-skills
+copilot plugin install dotnet-diag@dotnet-agent-skills
+copilot plugin install dotnet-msbuild@dotnet-agent-skills
+copilot plugin install dotnet-nuget@dotnet-agent-skills
+copilot plugin install dotnet-upgrade@dotnet-agent-skills
+copilot plugin install dotnet-template-engine@dotnet-agent-skills
+copilot plugin install dotnet-test@dotnet-agent-skills
+copilot plugin install dotnet-test-migration@dotnet-agent-skills
+copilot plugin install dotnet11@dotnet-agent-skills
 
 # IDE and essential development
 choco install nodejs -y
@@ -71,6 +89,7 @@ choco install keepass -y
 choco install keepass-plugin-kpscript -y
 choco install bitwarden --ia '/allusers' -y
 [Environment]::SetEnvironmentVariable("BITWARDEN_NO_UPDATER", "1", [System.EnvironmentVariableTarget]::User)
+[Environment]::SetEnvironmentVariable("ELECTRON_NO_UPDATER", "1", [System.EnvironmentVariableTarget]::User)
 choco install bitwarden-cli --ia '/allusers' -y
 choco install paint.net -y
 choco install pdfcreator -y
