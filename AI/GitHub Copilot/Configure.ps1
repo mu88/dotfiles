@@ -28,7 +28,3 @@ foreach ($folder in @('instructions', 'agents')) {
     New-Item -ItemType Junction -Path $target -Target $source | Out-Null
     Write-Host "  ✓ $folder — junction created: $target → $source"
 }
-
-# Modernize .NET (based on https://devblogs.microsoft.com/dotnet/modernize-dotnet-anywhere-with-ghcp/)
-copilot -i "/plugin marketplace add dotnet/modernize-dotnet"
-copilot -i "/plugin install modernize-dotnet@modernize-dotnet-plugins"
