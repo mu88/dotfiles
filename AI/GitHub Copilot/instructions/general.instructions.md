@@ -30,6 +30,7 @@ applyTo: "**"
 - **Respect automated dependency managers.** If a repo uses a dependency update tool (Renovate, Dependabot, etc.): read its config before touching any dependency version. Never update a version that the tool manages, pins, or restricts — leave those to the tool's own PRs.
 
 ## Workspace & Tools
+- When working with temporary files (e.g. for logs, testing, etc. - not a conclsuive list), always either use the OS temp directory or the directory associated to your Copilot session.
 - When it comes to Git commit signing, Bitwarden's SSH agent is the only supported option.
 - Before concluding that `gh` cannot perform a GitHub operation, check whether `gh api` with the appropriate REST endpoint or GraphQL mutation can achieve it. `gh <command>` covers only common operations; the full API surface is accessible via `gh api`.
   - Example: `gh pr comment` only creates top-level PR comments. Replying to a review thread requires `gh api .../pulls/comments/{id}/replies`; resolving a thread requires a GraphQL mutation (`resolveReviewThread`).
