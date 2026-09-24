@@ -3,6 +3,8 @@ applyTo: "**/.github/**/*.{yaml,yml}"
 ---
 # GitHub Actions Guidelines
 
+- Prefer PowerShell for GitHub Actions over bash.
+
 ## Output and Summary
 
 - Always use `>>` to append to `$env:GITHUB_OUTPUT` and `$env:GITHUB_STEP_SUMMARY`. Do not use `Add-Content` for these variables:
