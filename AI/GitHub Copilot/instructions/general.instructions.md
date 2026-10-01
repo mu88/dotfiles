@@ -67,6 +67,7 @@ applyTo: "**"
 - Practice TDD: write a failing test first, implement the minimum to make it pass, then refactor (red-green-refactor).
 - When fixing bugs: always write a failing test that reproduces the bug before touching the implementation.
 - High test coverage is a first-class goal, not an afterthought — untested code is unfinished code.
+- **Dual-suppression check:** when marking a Sonar/analyzer finding as "Won't Fix"/"False Positive", handle it in BOTH systems — the Sonar UI/API transition AND any code-level suppression (`[SuppressMessage]`, `// NOSONAR`). Setting only one lets the finding resurface on the next scan or tool switch.
 
 ## Autonomous Work Ethic
 - When asked to fix all issues of a category (coverage gaps, Sonar issues, failing tests): fix all issues discoverable in a single tool run, re-run the check, then continue until the output is genuinely clean. Never stop after a single pass if issues remain, and never summarize as "done" while known issues are still open.
