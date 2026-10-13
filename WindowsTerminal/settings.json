@@ -76,10 +76,9 @@
             "backgroundImageOpacity" : 0.2,
             "environment":
             {
-            	// Doesn't work yet - see https://github.com/github/copilot-cli/issues/1882
-                "EDITOR": "Code.exe --wait",
-                "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
-                "VISUAL": "Code.exe --wait"
+                // Doesn't work yet - see https://github.com/microsoft/terminal/issues/16486
+                "EDITOR": "code.cmd --wait",
+                "VISUAL": "code.cmd --wait"
             },
             "font": {
                 "face": "FiraCode NF",
@@ -102,9 +101,8 @@
                 "environment": 
                 {
                     "COPILOT_AUTO_UPDATE": "false",
-                    "EDITOR": "Code.exe --wait",
-                    "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
-                    "VISUAL": "Code.exe --wait"
+                    "EDITOR": "code.cmd --wait",
+                    "VISUAL": "code.cmd --wait"
                     // If you use a company proxy, uncomment these entries and run px proxy locally.
                     // ,"NODE_USE_ENV_PROXY": "1"
                     // ,"NODE_USE_SYSTEM_CA": "1"
@@ -122,9 +120,8 @@
                 "environment":
                 {
                     "COPILOT_AUTO_UPDATE": "false",
-                    "EDITOR": "Code.exe --wait",
-                    "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
-                    "VISUAL": "Code.exe --wait"
+                    "EDITOR": "code.cmd --wait",
+                    "VISUAL": "code.cmd --wait"
                     // If you use a company proxy, uncomment these entries and run px proxy locally.
                     // ,"NODE_USE_ENV_PROXY": "1"
                     // ,"NODE_USE_SYSTEM_CA": "1"
@@ -141,9 +138,8 @@
                 "environment": 
                 {
                     "OPENCODE_DISABLE_AUTOUPDATE": "1",
-                    "EDITOR": "Code.exe --wait",
-                    "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
-                    "VISUAL": "Code.exe --wait"
+                    "EDITOR": "code.cmd --wait",
+                    "VISUAL": "code.cmd --wait"
                     // If you use a company proxy, uncomment these entries and run px proxy locally.
                     // ,"NODE_USE_ENV_PROXY": "1"
                     // ,"NODE_USE_SYSTEM_CA": "1"
@@ -162,9 +158,8 @@
                 {
                     "MU88_REQUIRES_GITHUB_TOKEN": "1",
                     "OPENCODE_DISABLE_AUTOUPDATE": "1",
-                    "EDITOR": "Code.exe --wait",
-                    "PATH": "C:\\Program Files\\Microsoft VS Code;%PATH%",
-                    "VISUAL": "Code.exe --wait"
+                    "EDITOR": "code.cmd --wait",
+                    "VISUAL": "code.cmd --wait"
                     // If you use a company proxy, uncomment these entries and run px proxy locally.
                     // ,"NODE_USE_ENV_PROXY": "1"
                     // ,"NODE_USE_SYSTEM_CA": "1"
