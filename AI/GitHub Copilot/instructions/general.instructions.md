@@ -13,7 +13,7 @@ applyTo: "**"
 - **NEVER commit to or push `main`/`master` directly, except when EXPLICITLY allowed or instructed.** Always work on a feature branch.
 - **Before creating a new branch, fetch the latest remote state and branch from it without tracking**: `git fetch origin <base-branch>` then `git switch --no-track -c <branch> origin/<base-branch>`. Never branch from a stale local ref or set tracking at creation time.
 - **`git worktree add` must use a local start-point** (commit SHA or local branch ref), never a remote ref or bare remote-tracking branch name. Fetch first and resolve the SHA of the up-to-date base (`git fetch origin <base-branch>` then `git rev-parse origin/<base-branch>`) to use as start-point — this satisfies "local start-point" while guaranteeing freshness. Never set tracking at worktree creation.
-- Before cloning a repo, **ALWAYS** check whether a local copy already exists inside or under the path assigned to the environment variable `LOCAL_DEV_DIR`. If it exists, use the existing copy and pull instead of cloning.
+- Before cloning a repo, **ALWAYS** check for an existing local copy. If `LOCAL_DEV_DIR` is set and non-empty, search under that directory; otherwise, use the Git root directories configured for this machine. Preserve any host-specific clone destination and account rules. If a local copy exists, use it instead of cloning again.
 - **NEVER plain `git push`.** Every push:
   1. `$branch = git rev-parse --abbrev-ref HEAD` → if `HEAD` (detached), STOP and ask.
   2. `$upstream = git rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>$null` → if set and ≠ `origin/$branch`, STOP and ask (no auto-fix).

@@ -7,7 +7,6 @@ applyTo: "**/*.cs, **/*.razor, **/*.csproj, **/*.sln, **/*.slnx, **/*.props, **/
 ## Project Setup
 - Read `Directory.Build.props` for target framework and version. Read `Directory.Packages.props` for NuGet versions. Read `global.json` for SDK version. Read `.config/dotnet-tools.json` for tool versions. NEVER hardcode these values.
 - Use Central Package Management — add new packages to `Directory.Packages.props` (version) and project `.csproj` (reference without version).
-- Projects might reference `mu88.Shared` NuGet package which provides: OpenTelemetry, Roslyn analyzers (StyleCop, Meziantou, IDisposable), container publishing targets, health checks, SBOM generation.
 - Read `.editorconfig` for coding style rules and suppressed analyzer diagnostics before writing code.
 - Read `*.DotSettings` for JetBrains Rider-specific code style and inspection settings and also check for referenced settings files.
 - Use `dotnet-coverage` (from .NET tool manifest) for coverage collection, NOT `coverlet`.
@@ -36,19 +35,17 @@ applyTo: "**/*.cs, **/*.razor, **/*.csproj, **/*.sln, **/*.slnx, **/*.props, **/
 - Remove unnecessary `.ToList()` / `.ToArray()` calls — EF Core and serialization work with `IEnumerable<T>`. Exception: materializing to `.ToList()` is acceptable when a method must return `IReadOnlyList<T>` or when a collection is iterated multiple times.
 
 ## Testing
-- Framework: NUnit + FluentAssertions + NSubstitute.
 - Every test method MUST have `// Arrange`, `// Act`, `// Assert` comments (AAA pattern).
-- Use `[Category("Unit")]`, `[Category("Integration")]`, or `[Category("System")]` on every test class — CI jobs filter by category.
-- System tests use Testcontainers and require Docker. The container image must be built with `dotnet publish` before running them — derive the exact command, flags, target project, and MSBuild targets from the GitHub Actions workflow (including any referenced shared workflow); never guess or construct the command from defaults.
 - Aim for ≥90% line and branch coverage on new code (the SonarCloud leak-period gate is the enforced minimum). SonarCloud enforces this on the leak period (= all lines changed or added since the last version tag; legacy code is excluded).
 - Zero new Sonar issues on the leak period is a hard quality gate — do not leave open issues for later.
 - Test all branches: if/else, switch cases, null paths, and error paths. A test that only hits the happy path is insufficient.
 - Write tests for edge cases proactively — empty collections, null inputs, boundary values, concurrent access where applicable.
 - When encountering a hard-to-mock API without an interface (e.g. `File`, `Directory`, `Environment`, `DateTime`): apply the Humble Object pattern — introduce a narrow `IFoo` interface and a `Foo : IFoo` wrapper that delegates to the real API. Annotate the wrapper with `[ExcludeFromCodeCoverage]`. Inject `IFoo` everywhere in production code, never the concrete type. Do NOT pull in third-party abstractions libraries (e.g. `System.IO.Abstractions`) unless they are already a project dependency.
+- For WireMock.Net-style mapping JSON (PascalCase schema, i.e. the format produced/consumed by the WireMock.Net NuGet package), use Docker image `sheyenrath/wiremock.net:latest` — NOT the official `wiremock/wiremock` (Java-based, incompatible lowercase JSON schema, fails with `MappingFileException`).
 
 ## Mutation Testing
 - Mutation testing with Stryker.NET validates that tests actually catch bugs, not just execute code.
-- If `.stryker-config.json` exists in the repo, run: `dotnet tool run dotnet-stryker`
+- Check for `stryker-config.json` and `.stryker-config.json`. If mutation testing is configured, derive the invocation from the repository's tool manifest and CI configuration.
 - A test suite with high line coverage but low mutation score means the tests don't assert meaningfully — fix the assertions, not just the coverage number.
 
 ## Configuration
@@ -56,12 +53,7 @@ applyTo: "**/*.cs, **/*.razor, **/*.csproj, **/*.sln, **/*.slnx, **/*.props, **/
 - Inject `TimeProvider` (registered as `TimeProvider.System` singleton) instead of `DateTime.Now` or `DateTimeOffset.UtcNow`.
 
 ## CI/CD
-- All repos may use a shared reusable workflow from `mu88` — check whether it applies and understand this workflow. Do not duplicate CI logic.
-- Renovate config extends `github>mu88/common//renovate/default.json5`. Repo-specific overrides go in `renovate.json5`.
-- Release versioning uses Versionize with conventional commits (`chore(release): X.Y.Z`).
-- Docker: both regular and chiseled containers are published. `mu88.Shared` handles container family selection based on project properties.
 - ALWAYS read the GitHub Actions workflow files in `.github/workflows/` before executing any CI-related command. If they reference shared/reusable workflows from another repository, follow those references and read the shared workflow too — it is the authoritative source for how builds, tests, container publishing, and Sonar scans actually work. Never infer flags or commands from documentation or defaults.
-- SonarCloud runs on every branch push via CI. If the branch has already been pushed to GitHub and CI has completed, query the SonarCloud API for that branch's issues and coverage directly instead of running Sonar locally — it is faster, reflects the actual CI result, and requires no local token setup. Derive the project key and organization from the GitHub Actions workflow (they are passed as inputs to the shared workflow).
 
 ## Code Style
 - Use `Environment.NewLine` for line breaks in string construction, not `\n`.
@@ -86,4 +78,19 @@ applyTo: "**/*.cs, **/*.razor, **/*.csproj, **/*.sln, **/*.slnx, **/*.props, **/
 ## Observability
 - Use OpenTelemetry `ActivitySource` for tracing key operations.
 - Use `Meter` + `Counter`/`Histogram` for custom metrics.
+
+## Rules specific to github.com/mu88 repositories
+
+Apply this section only after verifying that the repository's origin remote points to github.com/mu88 via HTTPS or SSH.
+If the origin remote is missing or cannot be verified, do not apply this section.
+
+- Projects might reference `mu88.Shared` NuGet package which provides: OpenTelemetry, Roslyn analyzers (StyleCop, Meziantou, IDisposable), container publishing targets, health checks, SBOM generation.
+- Framework: NUnit + FluentAssertions + NSubstitute.
+- Use `[Category("Unit")]`, `[Category("Integration")]`, or `[Category("System")]` on every test class — CI jobs filter by category.
+- System tests use Testcontainers and require Docker. The container image must be built with `dotnet publish` before running them — derive the exact command, flags, target project, and MSBuild targets from the GitHub Actions workflow (including any referenced shared workflow); never guess or construct the command from defaults.
+- All repos may use a shared reusable workflow from `mu88` — check whether it applies and understand this workflow. Do not duplicate CI logic.
+- Renovate config extends `github>mu88/common//renovate/default.json5`. Repo-specific overrides go in `renovate.json5`.
+- Release versioning uses Versionize with conventional commits (`chore(release): X.Y.Z`).
+- Docker: both regular and chiseled containers are published. `mu88.Shared` handles container family selection based on project properties.
+- SonarCloud runs on every branch push via CI. If the branch has already been pushed to GitHub and CI has completed, query the SonarCloud API for that branch's issues and coverage directly instead of running Sonar locally — it is faster, reflects the actual CI result, and requires no local token setup. Derive the project key and organization from the GitHub Actions workflow (they are passed as inputs to the shared workflow).
 - `mu88.Shared` auto-configures ASP.NET Core, EF Core, process, and runtime instrumentation.

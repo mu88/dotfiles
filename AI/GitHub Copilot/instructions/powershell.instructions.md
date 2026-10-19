@@ -173,6 +173,8 @@ function Remove-UserAccount {
 
 ## Documentation and Style
 
+- Comments: rare, only when necessary. Write self-explanatory code with clear names instead. Exception: comment-based help blocks (`<# ... #>`) are mandatory for all public-facing functions regardless of this rule.
+
 - **Comment-Based Help:** Include comment-based help for any public-facing function or cmdlet. Inside the function, add a `<# ... #>` help comment with at least:
   - `.SYNOPSIS` Brief description
   - `.DESCRIPTION` Detailed explanation

@@ -20,6 +20,7 @@ gh extension install github/gh-stack
 
 # AI
 choco install github-copilot-cli -y
+choco install rtk -y
 copilot skill install github/gh-stack
 copilot plugin marketplace add dotnet/modernize-dotnet
 copilot plugin install modernize-dotnet@modernize-dotnet-plugins
