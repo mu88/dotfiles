@@ -2,9 +2,10 @@
     gpgsign = true
 [gpg]
 	format = ssh
+[include]
+    path = ~/.gitconfig-mu88-local
 [user]
     name = mu88
     email = 4560672+mu88@users.noreply.github.com
-    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIElEyYsiaLEEiMvzfcXCJ6VMTx9Q95uDAlTk/D6DryKy
 [credential "https://github.com"]
     username = mu88
