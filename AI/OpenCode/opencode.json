@@ -1,11 +1,15 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "model": "github-copilot/claude-sonnet-5",
+  "plugin": [
+    "file:///{env:MU88_DOTFILES}/AI/OpenCode/plugins/rtk.ts"
+  ],
   "instructions": [
     ".github/copilot-instructions.md",
     ".github/instructions/**/*.instructions.md",
     "~/.copilot/copilot-instructions.md",
     "~/.copilot/instructions/*.instructions.md",
-    "{env:MU88_DOTFILES}/AI/GitHub Copilot/instructions/*.instructions.md"
+    "{env:MU88_DOTFILES}/AI/GitHub Copilot/instructions/*.instructions.md",
+    "{env:MU88_DOTFILES}/AI/GitHub Copilot/RTK/instructions/AGENTS.md"
   ]
 }
