@@ -10,6 +10,7 @@ applyTo: "**"
 
 ## Mandatory Instructions
 - **NEVER touch the Git config** (globally or per-repo) without explicit user consent. This includes `user.name`, `user.email`, `core.sshCommand`, credential helpers, and `gpg` settings.
+- Before concluding that Git identity or signing configuration is missing, inspect `GIT_CONFIG_COUNT`, `GIT_CONFIG_KEY_n`, and `GIT_CONFIG_VALUE_n` as well as `git config --show-origin`; environment-injected configuration can load the dotfiles Git config without an entry in `~/.gitconfig`.
 - **NEVER commit to or push `main`/`master` directly, except when EXPLICITLY allowed or instructed.** Always work on a feature branch.
 - **Before creating a new branch, fetch the latest remote state and branch from it without tracking**: `git fetch origin <base-branch>` then `git switch --no-track -c <branch> origin/<base-branch>`. Never branch from a stale local ref or set tracking at creation time.
 - **`git worktree add` must use a local start-point** (commit SHA or local branch ref), never a remote ref or bare remote-tracking branch name. Fetch first and resolve the SHA of the up-to-date base (`git fetch origin <base-branch>` then `git rev-parse origin/<base-branch>`) to use as start-point — this satisfies "local start-point" while guaranteeing freshness. Never set tracking at worktree creation.
@@ -38,6 +39,7 @@ applyTo: "**"
 - Worktrees MUST go in `__worktrees__` under the Git root. Always check for existing worktrees first; always clean up (remove) after.
 
 ### Pull Requests & Code Reviews
+- For repositories with a verified origin under `github.com/mu88`, never create pull requests or apply the SSA workflow. Work directly on feature branches and push them only when explicitly requested.
 - When filing PRs, also check for existing PR templates and incorporate them if present, together with the above rules. Also ensure that the PR descriptions are properly formatted, e.g. contain no escaping issues. After filing the PR, verify that the description appears as intended on GitHub and edit if necessary to fix formatting issues.
 - Never insert a line break to fit a column width (intentional deviation from the classic 72-char wrap rule, since GitHub already soft-wraps) — write each paragraph or bullet as one unbroken line. Always add an AI signature footer line to the PR description.
 - As long as your filed PRs are still in draft status, always make sure that you're up to date with the base branch (e.g. `main`) by regularly rebasing on the latest commits from the base branch.
