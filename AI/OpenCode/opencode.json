@@ -1,6 +1,28 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "model": "github-copilot/claude-sonnet-5",
+  "lsp": true,
+  "agent": {
+    "mu88-ai-loop-and-merge": {
+      "description": "Runs the mu88 CI and Sonar quality loop, then prepares a merge message without merging. Select explicitly for this workflow.",
+      "mode": "primary",
+      "prompt": "{file:../Shared/mu88-ai-loop-and-merge.md}"
+    }
+  },
+  "mcp": {
+    "binlog": {
+      "type": "local",
+      "command": [
+        "dotnet",
+        "dnx",
+        "Microsoft.AITools.BinlogMcp",
+        "--yes",
+        "--prerelease"
+      ],
+      "enabled": true,
+      "timeout": 120000
+    }
+  },
   "plugin": [
     "file:///{env:MU88_DOTFILES}/AI/OpenCode/plugins/rtk.ts"
   ],

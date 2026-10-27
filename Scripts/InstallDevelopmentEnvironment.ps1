@@ -1,4 +1,7 @@
-choco feature enable --name=useRememberedArgumentsForUpgrades 
+$ErrorActionPreference = 'Stop'
+$PSNativeCommandUseErrorActionPreference = $true
+
+choco feature enable --name=useRememberedArgumentsForUpgrades
 
 [Environment]::SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "true", [System.EnvironmentVariableTarget]::User)
 
@@ -20,25 +23,41 @@ gh extension install github/gh-stack
 
 # AI
 choco install github-copilot-cli -y
+choco install opencode -y
 choco install rtk -y
 copilot skill install github/gh-stack
 copilot plugin marketplace add dotnet/modernize-dotnet
 copilot plugin install modernize-dotnet@modernize-dotnet-plugins
 copilot plugin marketplace add dotnet/skills
-copilot plugin install dotnet@dotnet-agent-skills
-copilot plugin install dotnet-advanced@dotnet-agent-skills
-copilot plugin install dotnet-ai@dotnet-agent-skills
-copilot plugin install dotnet-aspnetcore@dotnet-agent-skills
-copilot plugin install dotnet-blazor@dotnet-agent-skills
-copilot plugin install dotnet-data@dotnet-agent-skills
-copilot plugin install dotnet-diag@dotnet-agent-skills
-copilot plugin install dotnet-msbuild@dotnet-agent-skills
-copilot plugin install dotnet-nuget@dotnet-agent-skills
-copilot plugin install dotnet-upgrade@dotnet-agent-skills
-copilot plugin install dotnet-template-engine@dotnet-agent-skills
-copilot plugin install dotnet-test@dotnet-agent-skills
-copilot plugin install dotnet-test-migration@dotnet-agent-skills
-copilot plugin install dotnet11@dotnet-agent-skills
+
+$dotnetSkillPackages = @(
+    'dotnet'
+    'dotnet-advanced'
+    'dotnet-ai'
+    'dotnet-aspnetcore'
+    'dotnet-blazor'
+    'dotnet-data'
+    'dotnet-diag'
+    'dotnet-msbuild'
+    'dotnet-nuget'
+    'dotnet-upgrade'
+    'dotnet-template-engine'
+    'dotnet-test'
+    'dotnet-test-migration'
+    'dotnet11'
+)
+foreach ($skillPackage in $dotnetSkillPackages) {
+    copilot plugin install "${skillPackage}@dotnet-agent-skills"
+}
+
+# OpenCode skills: re-run this block and the package list above for intentional updates.
+gh skill install github/gh-stack skills/gh-stack@main --agent opencode --scope user --force
+$dotnetSkillPaths = gh api repos/dotnet/skills/git/trees/main --field recursive=1 --method GET --jq '.tree[] | select(.path | endswith("/SKILL.md")) | .path'
+foreach ($skillPackage in $dotnetSkillPackages) {
+    foreach ($skillPath in ($dotnetSkillPaths | Where-Object { $_.StartsWith("plugins/$skillPackage/skills/") })) {
+        gh skill install dotnet/skills "$skillPath@main" --agent opencode --scope user --force
+    }
+}
 
 # IDE and essential development
 choco install nodejs -y
