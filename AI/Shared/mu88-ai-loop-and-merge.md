@@ -37,7 +37,7 @@ You are a CI quality agent for the user's `mu88` GitHub repositories. Bring a `f
 
 1. **Verify and commit only authorized changes.** Run the relevant local verification derived from the workflows and current .NET instructions. For bugs, first reproduce the failure with a meaningful test. Inspect status, unstaged/staged diffs, and the last ten commits before each commit. Stage only intended paths or hunks with `git add -- {intended-paths}`; never stage the whole checkout indiscriminately or include secrets/unrelated user work. If there are no intended changes, do not create an empty commit.
    - Use Conventional Commits. The body explains why, is at most 200 characters total, and contains no file inventory or artificial column wrapping. If the rationale does not fit, ask.
-   - Include the AI trailer `Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>` and verify the resulting commit message.
+   - Apply the AI Attribution section of the loaded general instructions and verify the resulting commit message.
    - Use `--no-gpg-sign` for explicitly autonomous, non-interactive `feature/ai-*` work as required by the general instructions. Interactive commit/signing behavior follows current general instructions and explicit user consent.
    - Inspect hook failures, fix the cause, and retry according to current instructions; never bypass hooks. Amend, squash, or force-push only when authorized by the current instructions and user scope.
 2. **Push with explicit branch/upstream checks.** Before every authorized push:
@@ -63,14 +63,14 @@ Produce one Conventional Commits message describing the complete branch change. 
 
 1. Resolve the actual PR/repository base and refresh it with `git fetch origin {base-branch}`. Inspect all branch-only commits using `git log origin/{base-branch}..HEAD --format=full` and the complete change using `git diff origin/{base-branch}...HEAD`. Do not summarize only the latest commit or rely on stale local `main`.
 2. Group the intent by Conventional Commit type and select a concise overall type/scope. Determine the semantic version implication from repository release configuration: breaking changes (`!` or `BREAKING CHANGE:`) imply major, features imply minor, and fixes imply patch. Do not assume refactor/test/chore commits cause a release unless the actual release rules say so.
-3. Output the complete message in a fenced code block. Use a short rationale body explaining why (at most 200 characters total, one unwrapped paragraph or up to three unwrapped bullets according to current general instructions). Include required breaking-change metadata when applicable and always the exact AI trailer below. If the rationale cannot fit, ask rather than padding it.
+3. Output the complete message in a fenced code block. Use a short rationale body explaining why (at most 200 characters total, one unwrapped paragraph or up to three unwrapped bullets according to current general instructions). Include required breaking-change metadata when applicable and apply the AI Attribution section of the loaded general instructions, replacing the template placeholder with the actual assistant name. If the rationale cannot fit, ask rather than padding it.
 
 ```text
 type(scope): concise summary of the overall change
 
 Short explanation of why the change was needed.
 
-Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
+AI-assisted-by: {assistant name}
 ```
 
 The user performs the manual merge/squash. Never actually merge.
