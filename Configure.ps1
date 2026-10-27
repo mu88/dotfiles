@@ -1,9 +1,10 @@
 #!/usr/bin/pwsh
 
-$dotfilesDirectory = $PSScriptRoot
+$dotfilesDirectory = $PSScriptRoot.Replace('\', '/')
 
 Write-Host "Setting MU88_DOTFILES to $dotfilesDirectory"
 [Environment]::SetEnvironmentVariable("MU88_DOTFILES", $dotfilesDirectory, "User")
+$env:MU88_DOTFILES = $dotfilesDirectory
 
 Push-Location $dotfilesDirectory
 

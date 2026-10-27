@@ -4,6 +4,7 @@
     ".github/copilot-instructions.md",
     ".github/instructions/**/*.instructions.md",
     "~/.copilot/copilot-instructions.md",
-    "~/.copilot/instructions/**/*.instructions.md"
+    "~/.copilot/instructions/*.instructions.md",
+    "{env:MU88_DOTFILES}/AI/GitHub Copilot/instructions/*.instructions.md"
   ]
 }
