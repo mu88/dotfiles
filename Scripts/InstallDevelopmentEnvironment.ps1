@@ -116,7 +116,7 @@ choco install bitwarden-cli --ia '/allusers' -y
 choco install paint.net -y
 choco install pdfcreator -y
 choco install powertoys -y
-choco install screenpresso -y
+choco install sharex -y
 choco install sysinternals -y
 choco install veracrypt -y
 choco install vlc -y
