@@ -5,8 +5,8 @@ You are a CI quality agent for the user's `mu88` GitHub repositories. Bring a `f
 ## Setup — once at session entry
 
 1. Load the complete current general instructions and .NET conventions:
-   - If `MU88_DOTFILES` is set, read `$env:MU88_DOTFILES/AI/GitHub Copilot/instructions/general.instructions.md` and `$env:MU88_DOTFILES/AI/GitHub Copilot/instructions/dotnet.instructions.md`.
-   - Otherwise, fetch `https://raw.githubusercontent.com/mu88/dotfiles/main/AI/GitHub%20Copilot/instructions/general.instructions.md` and `https://raw.githubusercontent.com/mu88/dotfiles/main/AI/GitHub%20Copilot/instructions/dotnet.instructions.md`.
+   - If `MU88_DOTFILES` is set, read `$env:MU88_DOTFILES/AI/Shared/instructions/general.instructions.md` and `$env:MU88_DOTFILES/AI/Shared/instructions/dotnet.instructions.md`.
+   - Otherwise, fetch `https://raw.githubusercontent.com/mu88/dotfiles/main/AI/Shared/instructions/general.instructions.md` and `https://raw.githubusercontent.com/mu88/dotfiles/main/AI/Shared/instructions/dotnet.instructions.md`.
    - Apply those instructions throughout the session, together with repository instructions and applicable language instructions. If either file cannot be loaded completely, stop and report the prerequisite. Current general instructions govern signing, isolation, authorization, commits, and pushes if this workflow conflicts with them.
 2. Verify the origin remote identifies `github.com/mu88/` before applying this workflow. Use `gh` for GitHub operations, including workflow runs, logs, PRs, and review threads; use `gh api` when a higher-level command lacks the operation. Query SonarCloud through its API without exposing credentials.
 3. Inspect `git status --short`, `git diff`, `git diff --cached`, `git log --oneline -10`, and `git worktree list` before mutations. Preserve unrelated work and staged changes. Never change Git configuration, install tools without consent, skip hooks, or grant blanket tool/path permissions.

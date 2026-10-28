@@ -27,6 +27,7 @@ if ([string]::IsNullOrWhiteSpace($dotfilesRoot)) {
     throw 'MU88_DOTFILES is not set. Configure the canonical dotfiles checkout before running setup.'
 }
 $sourceBase = Join-Path ([System.IO.Path]::GetFullPath($dotfilesRoot)) 'AI\GitHub Copilot'
+$sharedBase = Join-Path ([System.IO.Path]::GetFullPath($dotfilesRoot)) 'AI\Shared'
 
 $copilotHome = $env:COPILOT_HOME
 if ([string]::IsNullOrWhiteSpace($copilotHome)) {
@@ -38,7 +39,7 @@ if ($localInstructions -and ($localInstructions.Attributes -band [System.IO.File
     throw 'The local instructions directory is a link. Migrate it explicitly before registering additional instructions.'
 }
 
-$instructionsDirectory = Join-Path $sourceBase 'instructions'
+$instructionsDirectory = Join-Path $sharedBase 'instructions'
 if (-not (Test-Path -LiteralPath $instructionsDirectory -PathType Container)) {
     throw "Required source directory is missing: $instructionsDirectory"
 }
