@@ -31,7 +31,7 @@
     ".github/instructions/**/*.instructions.md",
     "~/.copilot/copilot-instructions.md",
     "~/.copilot/instructions/*.instructions.md",
-    "{env:MU88_DOTFILES}/AI/GitHub Copilot/instructions/*.instructions.md",
-    "{env:MU88_DOTFILES}/AI/GitHub Copilot/RTK/instructions/AGENTS.md"
+    "{env:MU88_DOTFILES}/AI/Shared/instructions/*.instructions.md",
+    "{env:MU88_DOTFILES}/AI/Shared/RTK/instructions/AGENTS.md"
   ]
 }

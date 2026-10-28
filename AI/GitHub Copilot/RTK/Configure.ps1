@@ -51,7 +51,7 @@ if ([string]::IsNullOrWhiteSpace($CopilotHome)) {
 
 $CopilotHome = [System.IO.Path]::GetFullPath($CopilotHome)
 $hookSource = Join-Path $sourceBase 'hooks\rtk-rewrite.json'
-$instructionsDirectory = Join-Path $sourceBase 'instructions'
+$instructionsDirectory = Join-Path ([System.IO.Path]::GetFullPath($dotfilesRoot)) 'AI\Shared\RTK\instructions'
 $hookTarget = Join-Path $CopilotHome 'hooks\rtk-rewrite.json'
 $environmentName = 'COPILOT_CUSTOM_INSTRUCTIONS_DIRS'
 

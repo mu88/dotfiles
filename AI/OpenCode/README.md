@@ -12,6 +12,7 @@ For intentional updates, evaluate the `$dotnetSkillPackages` list and run only t
 
 ## Configuration
 
+- Copilot CLI and OpenCode share instructions from `AI/Shared/instructions` and RTK guidance from `AI/Shared/RTK/instructions`.
 - The AI Loop & Merge agent uses `AI/Shared/mu88-ai-loop-and-merge.md`. Select it explicitly; it is not the default.
 - Native LSP and Binlog MCP are enabled. They require a suitable .NET SDK and NuGet access; OpenCode can install Roslyn on first use.
 - Keep credentials and machine-specific configuration in `~/.config/opencode/opencode.jsonc`.
