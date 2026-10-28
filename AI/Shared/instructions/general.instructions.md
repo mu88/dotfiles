@@ -57,6 +57,7 @@ applyTo: "**"
 - AI attribution does not replace cryptographic commit signing.
 
 ## Communication
+- In conversations, OC means OpenCode and GHCP means GitHub Copilot. GHCP does not imply a specific interface such as Copilot CLI; distinguish interfaces when relevant.
 - Communicate with the user in **German** — explanations, questions, summaries, all in German.
 - All **code** (comments, identifiers, commit messages, documentation, log messages) MUST be in **English**. No German in code, ever.
 - Be concise in explanations. Prefer code over prose.
@@ -65,10 +66,10 @@ applyTo: "**"
 
 ## Code Quality
 - Use descriptive names for lambda parameters (`article`, `preference`, `unit`), never single-letter (`x`, `a`, `p`).
-- Prefer the simplest solution that correctly solves the problem — avoid over-engineering and unnecessary abstractions.
+- **KISS / YAGNI:** Prefer the simplest solution that satisfies the current requirements. Do not add speculative features, configuration options, extension points, or abstractions for hypothetical future needs. Introduce complexity only when a concrete requirement justifies it.
 
 ## Architecture
-- **Clean Code:** Every function/method does one thing (Single Responsibility). Functions exceeding 20 lines MUST be refactored — extract responsibilities into smaller functions. Avoid side effects in query methods (Command-Query Separation).
+- **Clean Code:** Keep functions focused on one responsibility. Extract smaller functions when doing so improves clarity or separates responsibilities, not merely to satisfy a line-count limit. Avoid side effects in query methods (Command-Query Separation).
 - **Layered Architecture (Dependency Rule):** Dependencies always point inward — domain/business logic has zero dependencies on infrastructure (databases, HTTP clients, file system, etc.). Infrastructure depends on domain, never the reverse.
 - **Feature Slices:** Within each architectural layer or project, organize code by feature/use case (e.g. `Orders/`, `Shopping/`), not by technical role (e.g. `Repositories/`, `Services/`). A developer working on a feature should find all related code in one place.
 - **GoF Design Patterns:** Apply GoF patterns when they solve a concrete problem naturally — don't apply them speculatively. Name the pattern in a comment when it is non-obvious. Prefer patterns that reduce coupling (Strategy, Decorator, Factory, Observer) over patterns that add structure for its own sake.
