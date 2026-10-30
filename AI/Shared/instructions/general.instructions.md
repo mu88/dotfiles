@@ -38,7 +38,13 @@ applyTo: "**"
 - Before concluding that `gh` cannot perform a GitHub operation, check whether `gh api` with the appropriate REST endpoint or GraphQL mutation can achieve it. `gh <command>` covers only common operations; the full API surface is accessible via `gh api`.
   - Example: `gh pr comment` only creates top-level PR comments. Replying to a review thread requires `gh api .../pulls/comments/{id}/replies`; resolving a thread requires a GraphQL mutation (`resolveReviewThread`).
 - Always check whether a Git repo already exists locally before cloning; use existing copy and pull instead.
-- Worktrees MUST go in `__worktrees__` under the Git root. Always check for existing worktrees first; always clean up (remove) after.
+- **Worktree placement for `mu88` GitHub repositories:** Determine repository ownership from the `origin` remote URL, not from Git author identity. If `origin` points to `github.com/mu88/<repository>` via HTTPS or SSH:
+  - Use `$env:LOCAL_DEV_DIR` as the machine-specific development root.
+  - Create worktrees at `$env:LOCAL_DEV_DIR\GitHub\__worktrees__\<repository-name>\<worktree-name>`.
+  - This location is outside the repository's main working directory. Never create a worktree inside the repository directory.
+  - If `LOCAL_DEV_DIR` is unset or empty, ask for the development root instead of guessing or hardcoding a path.
+- For repositories owned by other GitHub accounts or hosted elsewhere, follow the applicable machine/account-specific placement rules. Do not apply the `mu88` layout automatically.
+- Before creating a worktree, inspect `git worktree list` and check the intended destination for existing content. Remove worktrees you created after completion, preserving all work and commits.
 
 ### Pull Requests & Code Reviews
 - For repositories with a verified origin under `github.com/mu88`, never create pull requests or apply the SSA workflow. Work directly on feature branches and push them only when explicitly requested.
