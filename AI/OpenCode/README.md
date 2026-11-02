@@ -37,3 +37,9 @@ Check setup through `/models`, `/mcps`, `/quota_status` and the selected agent. 
 ## Local indicator checks
 
 With Node.js 23.8+ available, run `node AI/OpenCode/tests/status-indicator.test.mjs` from the repository root. The offline checks use Node's built-in TypeScript stripping and synthetic events/timers; they never start OpenCode or access credentials. They do not replace the live Windows Terminal visual check.
+
+## Approval policy
+
+See [PERMISSIONS.md](PERMISSIONS.md) for the shared default-ask policy, exact read-only
+command allowlist, RTK behavior, caveats and validation. Set the machine-local CLI
+`session.permissions` to `prompt` to use it; auto-approve otherwise still accepts asks.
