@@ -134,10 +134,11 @@
                 "icon": "%MU88_DOTFILES%\\Stuff\\GitHub Copilot White.ico"
             },
             {
-                "commandline": "opencode",
+                "commandline": "pwsh.exe -NoExit -Command opencode",
                 "environment": 
                 {
                     "OPENCODE_DISABLE_AUTOUPDATE": "1",
+                    "MU88_REQUIRES_GITHUB_TOKEN": "1",
                     "EDITOR": "code.cmd --wait",
                     "VISUAL": "code.cmd --wait"
                     // If you use a company proxy, uncomment these entries and run px proxy locally.
