@@ -77,3 +77,20 @@ if (Get-Item -LiteralPath $target -Force -ErrorAction SilentlyContinue) {
         New-Item -ItemType Junction -Path $target -Target $source | Out-Null
     }
 }
+
+$skillsDirectory = Join-Path $sharedBase 'skills'
+if (-not (Test-Path -LiteralPath $skillsDirectory -PathType Container)) {
+    throw "Required source directory is missing: $skillsDirectory"
+}
+$settingsPath = Join-Path $copilotHome 'settings.json'
+$alreadyRegistered = $false
+if (Test-Path -LiteralPath $settingsPath -PathType Leaf) {
+    $normalized = $skillsDirectory.TrimEnd('\', '/')
+    $alreadyRegistered = (Get-Content -LiteralPath $settingsPath -Raw) -ireplace '\\\\', '\' |
+        Select-String -SimpleMatch $normalized -Quiet
+}
+if (-not $alreadyRegistered -and $PSCmdlet.ShouldProcess(
+    "Copilot settings: $settingsPath", "Register skill directory $skillsDirectory"
+)) {
+    & copilot skill add $skillsDirectory
+}

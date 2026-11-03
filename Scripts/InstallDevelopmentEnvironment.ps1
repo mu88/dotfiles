@@ -128,3 +128,4 @@ choco install stretchly -y
 
 Install-Module PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck
 Install-Module posh-git -Scope CurrentUser
+Install-Module CredentialManager -Scope CurrentUser
