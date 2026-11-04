@@ -52,3 +52,5 @@
 [rebase]
     autosquash = true
     autoStash = true
+[user]
+    useConfigOnly = true
