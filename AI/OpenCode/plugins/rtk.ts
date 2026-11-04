@@ -99,8 +99,7 @@ export function probeRtkHookOpencode(rtkBin: string): Promise<boolean> {
  * `agent` is OpenCode 2.x's `event.agent`; rtk reads `agent.<name>.permission`
  * on top of the root rules, which is what OpenCode itself applies. Without it
  * an agent-scoped ask on `ls *` would be silenced by the rewrite and an
- * agent-scoped deny on `ls -la` would never see the command. OpenCode 1.x sends
- * no agent field, so the V1 path stays root-only.
+ * agent-scoped deny on `ls -la` would never see the command.
  *
  * The answer is `{}` whenever the rewrite would change the verdict OpenCode's
  * own permission rules give, and that empty answer means the command runs as
@@ -141,7 +140,7 @@ export async function tryRewriteCommand(
   agent?: string
 ): Promise<string | null> {
   const tool = String(toolName ?? "").toLowerCase()
-  if ((tool !== "bash" && tool !== "shell") || typeof command !== "string" || !command.trim()) {
+  if (tool !== "shell" || typeof command !== "string" || !command.trim()) {
     return null
   }
 
@@ -189,17 +188,11 @@ async function ensureRtkUsable(): Promise<boolean> {
 }
 
 /**
- * OpenCode 2.x and 1.x (>= 1.18.29) plugin for RTK.
+ * OpenCode 2.x plugin for RTK.
  *
  * A plain object, because the 2.x loader schema-validates `default` against
  * `typeof === "object"` — a callable with `id`/`setup` bolted on fails
- * validation, so the V2 branch would never activate.
- * The `server()` method is the documented 1.x dual-shape entrypoint.
- *
- * 1.18.29 is the floor OpenCode's own V2 plugin docs put on the object form:
- * https://opencode.ai/v2/docs/build/plugins#support-v1. Below it
- * `rtk init -g --opencode` installs nothing when it can read
- * `opencode --version`, and names the version it found.
+ * validation, so the plugin would never activate.
  */
 const RtkOpenCodePlugin = {
   id: "rtk",
@@ -210,16 +203,6 @@ const RtkOpenCodePlugin = {
     await ctx?.tool?.hook?.("execute.before", (e: any) =>
       handleToolHook(e?.tool, e?.input, typeof e?.agent === "string" ? e.agent : undefined)
     )
-  },
-
-  // OpenCode 1.x entrypoint: `{tool, sessionID, callID}` — no agent field, so
-  // an agent-scoped ask stays silenced here.
-  async server() {
-    if (!(await ensureRtkUsable())) return {}
-    return {
-      "tool.execute.before": (input: any, output: any) =>
-        handleToolHook(input?.tool, output?.args),
-    }
   },
 }
 

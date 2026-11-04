@@ -170,7 +170,10 @@ function Resolve-OpenCodeV2 {
     param([string]$Path)
 
     $candidates = if ($Path) { @($Path) } else {
-        @((Get-Command opencode -All -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source), (Join-Path $env:LOCALAPPDATA 'Programs\OpenCode\opencode.exe'))
+        @(
+            Get-Command opencode2 -All -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source
+            Get-Command opencode -All -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source
+        )
     }
     foreach ($candidate in $candidates) {
         if ([string]::IsNullOrWhiteSpace($candidate) -or -not (Test-Path -LiteralPath $candidate -PathType Leaf)) { continue }

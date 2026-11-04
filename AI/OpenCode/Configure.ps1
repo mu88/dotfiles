@@ -6,4 +6,4 @@ if (-not $dotfilesRoot) {
     exit 1
 }
 
-[Environment]::SetEnvironmentVariable("OPENCODE_CONFIG", (Join-Path $dotfilesRoot "AI/OpenCode/opencode-v2.json"), "User")
+[Environment]::SetEnvironmentVariable("OPENCODE_CONFIG", (Join-Path $dotfilesRoot "AI/OpenCode/opencode.json"), "User")

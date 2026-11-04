@@ -9,15 +9,6 @@ try {
     $ErrorActionPreference = 'Stop'
     $PSNativeCommandUseErrorActionPreference = $true
 
-    if ($env:MU88_REQUIRES_GITHUB_TOKEN -eq '1' -and [string]::IsNullOrWhiteSpace($env:GITHUB_TOKEN)) {
-        $token = gh auth token
-        if ([string]::IsNullOrWhiteSpace($token)) {
-            throw "gh auth token returned no token."
-        }
-
-        $env:GITHUB_TOKEN = $token.Trim()
-    }
-
     Import-Module posh-git
     Import-Module PSReadLine
 

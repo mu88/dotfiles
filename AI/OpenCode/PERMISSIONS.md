@@ -1,6 +1,6 @@
 # Low-noise approvals for OpenCode V2
 
-The shared `opencode-v2.json` starts with **ask for every action** and adds a small,
+The shared `opencode.json` starts with **ask for every action** and adds a small,
 explicit allowlist. Use `session.permissions: "prompt"` in the user's `cli.json`;
 `autoaccept` or `--auto` automatically answers asks and defeats this distinction.
 

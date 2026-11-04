@@ -6,7 +6,7 @@ import { readFileSync } from 'node:fs';
 import { stripTypeScriptTypes } from 'node:module';
 import vm from 'node:vm';
 
-const config = JSON.parse(readFileSync(new URL('../opencode-v2.json', import.meta.url), 'utf8'));
+const config = JSON.parse(readFileSync(new URL('../opencode.json', import.meta.url), 'utf8'));
 assert.ok(Array.isArray(config.permissions), 'An explicit default-ask policy is required');
 const fixture = readFileSync(new URL('./fixtures/opencode-permissions-v2.2.1/evaluate.ts', import.meta.url), 'utf8');
 const sandbox = { process: { platform: 'win32' } };

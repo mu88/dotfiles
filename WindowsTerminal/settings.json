@@ -134,11 +134,10 @@
                 "icon": "%MU88_DOTFILES%\\Stuff\\GitHub Copilot White.ico"
             },
             {
-                "commandline": "pwsh.exe -NoExit -Command opencode",
+                "commandline": "pwsh.exe -NoExit -Command opencode2",
                 "environment": 
                 {
                     "OPENCODE_DISABLE_AUTOUPDATE": "1",
-                    "MU88_REQUIRES_GITHUB_TOKEN": "1",
                     "EDITOR": "code.cmd --wait",
                     "VISUAL": "code.cmd --wait"
                     // If you use a company proxy, uncomment these entries and run px proxy locally.
@@ -152,26 +151,6 @@
                 "hidden": false,
                 "icon": "%MU88_DOTFILES%\\Stuff\\OpenCode White.ico",
                 "name": "OpenCode CLI"
-            },
-            {
-                "commandline": "pwsh.exe -NoExit -File \"%MU88_DOTFILES%\\WindowsTerminal\\start-opencode-psmux.ps1\"",
-                "environment": 
-                {
-                    "MU88_REQUIRES_GITHUB_TOKEN": "1",
-                    "OPENCODE_DISABLE_AUTOUPDATE": "1",
-                    "EDITOR": "code.cmd --wait",
-                    "VISUAL": "code.cmd --wait"
-                    // If you use a company proxy, uncomment these entries and run px proxy locally.
-                    // ,"NODE_USE_ENV_PROXY": "1"
-                    // ,"NODE_USE_SYSTEM_CA": "1"
-                    // ,"HTTPS_PROXY": "http://localhost:3128"
-                    // ,"HTTP_PROXY": "http://localhost:3128"
-                    // ,"NO_PROXY": "127.0.0.1,localhost"
-                },
-                "guid": "{b85eab0e-078d-4cca-8db8-a1df2677f7f2}",
-                "hidden": false,
-                "icon": "%MU88_DOTFILES%\\Stuff\\OpenCode White.ico",
-                "name": "OpenCode CLI (psmux)"
             },
             {
                 "commandline": "pwsh.exe -NoExit -File \"%MU88_DOTFILES%\\WindowsTerminal\\attach-copilot-psmux.ps1\"",
