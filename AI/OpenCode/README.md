@@ -16,7 +16,9 @@ V2 watches configuration and plugins; use `/reload` if necessary. Restart the sh
 
 ## Skills and updates
 
-`Scripts/InstallDevelopmentEnvironment.ps1` installs public skills into `~/.config/opencode/skills` using `gh skill install --agent opencode --scope user`. Copilot retains its own installations. Personal skills shared by both tools belong in `~/.agents/skills`.
+`Scripts/InstallDevelopmentEnvironment.ps1` installs public skills into `~/.config/opencode/skills` using `gh skill install --agent opencode --scope user`. Copilot retains its own installations. Shared dotfiles skills live in `AI/Shared/skills`; OpenCode registers that directory in `opencode-v2.json` and Copilot registers it through `AI/GitHub Copilot/Configure.ps1`.
+
+The shared `resume-session-finder` searches local Copilot CLI or OpenCode V2 sessions. Its OpenCode helper requires an already running local managed service and a V2 executable; use `-OpenCodePath` if the executable is not discoverable. After migrating an older personal copy from `~/.agents/skills`, verify the loaded skill's source in both tools and preserve the old copy until the migration is confirmed. OpenCode can reload with `/reload`; Copilot CLI supports `/skills reload` and `/skills info resume-session-finder`.
 
 For intentional updates, evaluate the `$dotnetSkillPackages` list and run only the block labeled `OpenCode skills`, not the Copilot loop or the entire development setup. The block selects upstream `main` explicitly because the current `gh skill update` can prefer older release tags.
 
