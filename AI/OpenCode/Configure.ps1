@@ -1,4 +1,7 @@
 # Link OpenCode configuration to this dotfiles repo so there is a single source of truth.
+[CmdletBinding(SupportsShouldProcess)]
+param()
+
 $ErrorActionPreference = 'Stop'
 $dotfilesRoot = $env:MU88_DOTFILES
 if (-not $dotfilesRoot) {
@@ -6,4 +9,6 @@ if (-not $dotfilesRoot) {
     exit 1
 }
 
-[Environment]::SetEnvironmentVariable("OPENCODE_CONFIG", (Join-Path $dotfilesRoot "AI/OpenCode/opencode.json"), "User")
+if ($PSCmdlet.ShouldProcess('User environment: OPENCODE_CONFIG', 'Register OpenCode configuration')) {
+    [Environment]::SetEnvironmentVariable("OPENCODE_CONFIG", (Join-Path $dotfilesRoot "AI/OpenCode/opencode.json"), "User")
+}

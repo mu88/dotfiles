@@ -5,14 +5,11 @@ description: Use when validating an implementation or debugging approach, search
 
 MCP servers are blocked by policy here. Use SOFA's plain REST API instead of its MCP server.
 
-## Prerequisite
-
-The PowerShell module `CredentialManager` (`Get-StoredCredential`) must be installed (`Scripts/InstallDevelopmentEnvironment.ps1` does this). If it is missing, stop and tell the human instead of installing it yourself.
-
 ## Authentication
 
-1. Retrieve the API key by explicitly invoking `pwsh` (the module is only installed for PowerShell 7, not for `powershell.exe` 5.1 -- do not rely on whichever shell happens to be active): `pwsh -NoProfile -Command "(Get-StoredCredential -Target SOFA_API_KEY).GetNetworkCredential().Password"`. Never print, log, or echo the retrieved key. If `Get-StoredCredential` is not available, try to import the `CredentialManager` module first: `Import-Module CredentialManager`.
-2. If no key is stored, stop and tell the human the SOFA onboarding flow (`GET /api/onboarding`) must be completed first; do not start it without explicit confirmation.
+1. On Windows, use PowerShell 7 and retrieve the key from the existing `CredentialManager` entry: `$apiKey = (Get-StoredCredential -Target 'SOFA_API_KEY').GetNetworkCredential().Password`. If needed, import the module with `Import-Module CredentialManager`; if it is unavailable, stop without installing it. Run the assignment in the same process that makes the REST requests; do not emit the key as command output.
+2. On Linux, retrieve the key from the Secret Service: `$apiKey = & secret-tool lookup application sofa credential api-key`. Run the lookup and REST requests in the same PowerShell process; never run the lookup as a standalone tool call that exposes its output. If `secret-tool` is missing, the keyring is unavailable, or no key is found, stop and report the prerequisite without installing tools or starting onboarding.
+3. On either platform, never print, log, or put the key in command-line arguments, shell history, or a plaintext configuration file. Use it only in memory for the request headers. If no key is available, do not start SOFA onboarding without explicit confirmation.
 
 ## Protocol
 

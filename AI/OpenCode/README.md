@@ -1,6 +1,6 @@
 # OpenCode setup
 
-Run `AI/OpenCode/Configure.ps1` to register `opencode.json` through `OPENCODE_CONFIG`. The repository-root setup also calls it.
+Run `AI/Configure.ps1` to register `opencode.json` through `OPENCODE_CONFIG`. The repository-root setup also calls it. For Linux, see `AI/README.md`.
 Keep `MU88_DOTFILES` normalized to forward slashes using the root setup script.
 V2 watches configuration and plugins; use `/reload` if necessary. Restart the shared service only to change its inherited environment or diagnose an unhealthy service.
 
