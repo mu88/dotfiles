@@ -37,10 +37,7 @@
         echo \"Tag $tag_name moved to new commit $new_commit.\"; \
     }; f"
 [core]
-    autocrlf = true
     longpaths = true
-[credential]
-    helper = wincred
 [fetch]
     prune = true
 [i18n]
