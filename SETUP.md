@@ -8,7 +8,7 @@ Personal configuration for Windows and Linux Mint. `{checkout}` means the absolu
 - Obtain approval for installations, configuration changes, and service restarts. Never expose credentials, grant blanket test permissions, or commit/push without an explicit request.
 - Report `MATCH`, `DIFFERENCE`, `BLOCKED`, or justified `N/A` in the session, not as permanent checkmarks here. Update this document when the desired configuration changes.
 
-**Validation:** an inventory needs only read-only checks, without starting services or installing dependencies. After a change, check the affected setting. On first setup or integration changes, also test the affected path end to end: a signed dummy Git commit and invalid-message rejection; a safe model-driven command and automatic RTK rewriting; or the actual terminal behavior. Use real registry/runtime evidence, not just model claims. Test credential changes with an approved read-only authenticated request. Use temporary fixtures, never push test commits, and do not run the AI Loop & Merge workflow as a smoke test. No permanent Pester suite is required.
+**Validation:** an inventory needs only read-only checks, without starting services or installing dependencies. After a change, check the affected setting. On first setup or integration changes, also test the affected path end to end: a signed dummy Git commit and invalid-message rejection; a safe model-driven command and automatic RTK rewriting; or the actual terminal behavior. Use real registry/runtime evidence, not just model claims. Test credential changes with an approved read-only authenticated request. Use temporary fixtures, never push test commits, and do not run the AI Loop & Merge workflow as a smoke test.
 
 ## 1. Checkout and tools
 

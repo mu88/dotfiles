@@ -33,9 +33,17 @@ For intentional updates, evaluate the `$dotnetSkillPackages` list and run only t
 
 Check setup through `/models`, `/mcps`, `/quota_status` and the selected agent. Use the same V2 executable/environment as WT for CLI diagnostics; API/session commands may start a shared service.
 
-## Local indicator checks
+## Offline checks
 
-With Node.js 23.8+ available, run `node AI/OpenCode/tests/status-indicator.test.mjs` from the repository root. The offline checks use Node's built-in TypeScript stripping and synthetic events/timers; they never start OpenCode or access credentials. They do not replace the live Windows Terminal visual check.
+With Node.js 23.8+ available, run these from the repository root:
+
+```powershell
+node AI/OpenCode/tests/permissions.test.mjs
+node AI/OpenCode/tests/status-indicator.test.mjs
+node AI/OpenCode/tests/rtk.test.mjs
+```
+
+The checks use Node's built-in TypeScript stripping and controlled collaborators; they never start OpenCode or access credentials. They do not replace the live Windows Terminal visual check. The GitHub Actions workflow also runs the commit-hook tests under `Git/tests` using the runner's installed Pester (5 or later).
 
 ## Approval policy
 

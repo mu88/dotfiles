@@ -1,0 +1,43 @@
+name: Testing
+
+on:
+  push:
+    paths:
+      - 'AI/OpenCode/**'
+      - 'Git/hooks/**'
+      - 'Git/tests/**'
+      - '.github/workflows/testing.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+
+      - name: Check permission policy
+        run: node AI/OpenCode/tests/permissions.test.mjs
+
+      - name: Test status indicator
+        run: node AI/OpenCode/tests/status-indicator.test.mjs
+
+      - name: Test RTK adapter
+        run: node AI/OpenCode/tests/rtk.test.mjs
+
+      - name: Test commit hook
+        run: |
+          Import-Module Pester -MinimumVersion '5.0'
+          $result = Invoke-Pester -Path Git/tests -Output Detailed -PassThru
+          if ($result.Result -ne 'Passed' -or $result.TotalCount -eq 0) { exit 1 }
