@@ -89,11 +89,12 @@ Binlog MCP needs a suitable .NET SDK and NuGet access. Inline CLI JSON merges ov
 
 | Desired state | Check |
 | --- | --- |
-| Windows `$PROFILE` loads the shared profile; `posh-git`, `PSReadLine`, `Terminal-Icons`, and Oh My Posh are available | Inspect the profile entry and dependencies; add the snippet below once |
-| Linux keeps its normal profile until the shared Windows profile is ported | Do not forge `WT_SESSION` to bypass the guard |
+| PowerShell 7 `$PROFILE` loads the shared profile; `posh-git`, `PSReadLine`, `Terminal-Icons`, and native Oh My Posh are available | Inspect the profile entry and dependencies on each platform; add the snippet below once |
+| The profile runs in interactive terminals: Windows Terminal on Windows, normal terminals on Linux | Verify a fresh terminal; redirected and `-NonInteractive` calls skip customization |
+| The terminal uses a Nerd Font for prompt and file icons | Check actual rendering; installed modules alone do not prove terminal compatibility |
 | Windows with PSMux sets `PSMUX_CONFIG_FILE` to `{checkout}/WindowsTerminal/psmux.conf` | Compare the variable/path; review `WindowsTerminal/settings.json` rather than replacing local settings wholesale |
 
-Windows profile entry:
+PowerShell profile entry on either platform:
 
 ```powershell
 if ($env:MU88_DOTFILES) {

@@ -1,5 +1,7 @@
-# Run only in Windows Terminal as other terminals might not properly support other PowerShell modules and screw up the formatting
-if (!$env:WT_SESSION) {
+# Skip automation and preserve the Windows Terminal restriction on Windows.
+if ([Console]::IsInputRedirected -or [Console]::IsOutputRedirected -or
+    ([Environment]::GetCommandLineArgs() -match '^-(NonInteractive|NonI)$') -or
+    ($IsWindows -and -not $env:WT_SESSION)) {
     return
 }
 
@@ -13,8 +15,13 @@ try {
     Import-Module PSReadLine
 
     # Terminal-Icons reads and rewrites shared XML files during import.
-    $terminalIconsUserId = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
-    $terminalIconsMutex = [System.Threading.Mutex]::new($false, "Local\TerminalIcons.Import.$terminalIconsUserId")
+    $terminalIconsMutexName = if ($IsWindows) {
+        "Local\TerminalIcons.Import.$([System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value)"
+    } else {
+        # Coordinate imports across separate Unix terminal sessions.
+        "Global\TerminalIcons.Import.$([Environment]::UserName)"
+    }
+    $terminalIconsMutex = [System.Threading.Mutex]::new($false, $terminalIconsMutexName)
     $terminalIconsLockAcquired = $false
     try {
         try {
@@ -43,7 +50,7 @@ try {
     }
 
     # See https://github.com/JanDeDobbeleer/oh-my-posh/issues/6535#issuecomment-3077804893
-    $env:OSTYPE = $null
+    if ($IsWindows) { $env:OSTYPE = $null }
     oh-my-posh init pwsh --config "OhMyPosh.json" | Invoke-Expression
 
     # See https://www.hanselman.com/blog/adding-predictive-intellisense-to-my-windows-terminal-powershell-prompt-with-psreadline
