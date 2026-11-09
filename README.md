@@ -1,4 +1,7 @@
 # Development Tools
+
+For workstation configuration on Windows and Linux, see [SETUP.md](SETUP.md).
+
 ## Visual Studio Extensions
 - [SwitchStartupProject](https://heptapod.host/thirteen/switchstartupproject/)
 - [Markdown Editor](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.MarkdownEditor)
