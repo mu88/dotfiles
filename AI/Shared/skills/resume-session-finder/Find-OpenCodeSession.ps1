@@ -24,10 +24,44 @@ param(
 $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $true
 
+function Invoke-OpenCodeApiCommand {
+    param([string]$Path, [string]$OutputPath)
+
+    $startInfo = [System.Diagnostics.ProcessStartInfo]::new()
+    $startInfo.UseShellExecute = $false
+    $startInfo.FileName = '/bin/sh'
+    foreach ($argument in @('-c', 'exec "$1" api get "$2" > "$3"', 'opencode-api', $executable, $Path, $OutputPath)) {
+        $startInfo.ArgumentList.Add($argument)
+    }
+
+    $process = [System.Diagnostics.Process]::Start($startInfo)
+    try {
+        $process.WaitForExit()
+        if ($process.ExitCode -ne 0) {
+            throw "OpenCode API request failed with exit code $($process.ExitCode)."
+        }
+    } finally {
+        $process.Dispose()
+    }
+}
+
 function Invoke-OpenCodeApi {
     param([string]$Path)
 
-    & $executable api get $Path | ConvertFrom-Json
+    if ($IsWindows) {
+        & $executable api get $Path | ConvertFrom-Json
+        return
+    }
+
+    $temporaryDirectory = [System.IO.Directory]::CreateTempSubdirectory('opencode-session-finder-')
+    $outputPath = Join-Path $temporaryDirectory.FullName 'response.json'
+    try {
+        Invoke-OpenCodeApiCommand -Path $Path -OutputPath $outputPath
+        [System.IO.File]::ReadAllText($outputPath) | ConvertFrom-Json
+    } finally {
+        [System.IO.File]::Delete($outputPath)
+        $temporaryDirectory.Delete()
+    }
 }
 
 function Get-SessionPage {

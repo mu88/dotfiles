@@ -2,14 +2,13 @@
 .SYNOPSIS
     Connects Copilot to the RTK hook and instructions in MU88_DOTFILES.
 .DESCRIPTION
-    Creates one file symlink and appends an additional instruction directory.
+    Creates one file symlink and registers instructions on Windows or in the current process.
     Preserves other hooks and local instructions. Does not run rtk init or install tools.
     Existing regular hook files and links to other targets must be migrated manually.
 .PARAMETER CopilotHome
     Copilot directory. Defaults to COPILOT_HOME, or ~/.copilot when unset.
 .PARAMETER EnvironmentTarget
-    Environment scope to update. User persists the setting for future terminals.
-    Process supports isolated testing without changing persistent settings.
+    Environment scope to update. User persists on Windows; Process affects the current process.
 .EXAMPLE
     .\Configure.ps1 -WhatIf
 .EXAMPLE
@@ -55,7 +54,7 @@ $instructionsDirectory = Join-Path ([System.IO.Path]::GetFullPath($dotfilesRoot)
 $hookTarget = Join-Path $CopilotHome 'hooks\rtk-rewrite.json'
 $environmentName = 'COPILOT_CUSTOM_INSTRUCTIONS_DIRS'
 
-foreach ($source in @($hookSource, (Join-Path $instructionsDirectory 'AGENTS.md'))) {
+foreach ($source in @($hookSource, (Join-Path $instructionsDirectory 'rtk.instructions.md'))) {
     if (-not (Test-Path -LiteralPath $source -PathType Leaf)) {
         throw "Required RTK source file is missing: $source"
     }
@@ -89,7 +88,7 @@ if (-not $existingHook -and $PSCmdlet.ShouldProcess($hookTarget, "Create file sy
     New-Item -ItemType Directory -Path (Split-Path $hookTarget) -Force | Out-Null
     New-Item -ItemType SymbolicLink -Path $hookTarget -Target $hookSource | Out-Null
 }
-if ($newValue -cne $currentValue -and $PSCmdlet.ShouldProcess(
+if (-not ($IsLinux -and $EnvironmentTarget -eq 'User') -and $newValue -cne $currentValue -and $PSCmdlet.ShouldProcess(
     "$EnvironmentTarget environment: $environmentName", 'Append RTK instruction directory'
 )) {
     [Environment]::SetEnvironmentVariable($environmentName, $newValue, $EnvironmentTarget)

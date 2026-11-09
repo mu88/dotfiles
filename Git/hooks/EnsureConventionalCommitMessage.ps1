@@ -1,5 +1,5 @@
 # The commit message has to be loaded from a Git-internal file
-$commitMessage = Get-Content $args[0]
+$commitMessage = Get-Content $args[0] -TotalCount 1
 
 $conventionalCommitRegex = "(?-i)^(Revert "")?(fixup! )?(build|ci|docs|feat|fix|perf|refactor|style|test|chore|revert|BREAKING CHANGE)(\([\w\-]+\))?!?:\s(\w+-\d+)?\w+.*"
 

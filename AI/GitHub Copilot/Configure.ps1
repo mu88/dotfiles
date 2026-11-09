@@ -1,26 +1,23 @@
 <#
 .SYNOPSIS
-    Registers additional Copilot instructions and links a missing agent directory.
+    Links a missing agent directory and registers Copilot instructions on Windows.
 .DESCRIPTION
-    Preserves local instructions and existing environment entries. Optionally configures RTK.
+    Preserves local instructions and existing environment entries.
     Existing instruction directory links require explicit migration before setup.
-.PARAMETER IncludeRtk
-    Also configures the RTK hook and additional instructions. Requires RTK on PATH.
 .EXAMPLE
-    .\Configure.ps1 -IncludeRtk -WhatIf
+    .\Configure.ps1 -WhatIf
 .EXAMPLE
-    .\Configure.ps1 -IncludeRtk
+    .\Configure.ps1
 .OUTPUTS
     None.
 .NOTES
     Existing local content is never replaced. RTK file symlinks may require elevation.
 #>
 [CmdletBinding(SupportsShouldProcess)]
-param(
-    [switch]$IncludeRtk
-)
+param()
 
 $ErrorActionPreference = 'Stop'
+$PSNativeCommandUseErrorActionPreference = $true
 
 $dotfilesRoot = $env:MU88_DOTFILES
 if ([string]::IsNullOrWhiteSpace($dotfilesRoot)) {
@@ -47,21 +44,19 @@ if ($instructionsDirectory.Contains(',')) {
     throw 'The instruction directory cannot contain commas because Copilot uses comma-separated paths.'
 }
 
-if ($IncludeRtk) {
-    & (Join-Path $sourceBase 'RTK\Configure.ps1') -CopilotHome $copilotHome
-}
-
-$environmentName = 'COPILOT_CUSTOM_INSTRUCTIONS_DIRS'
-$currentValue = [Environment]::GetEnvironmentVariable($environmentName, 'User')
-$directories = @($currentValue -split ',' | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
-$hasInstructions = @($directories | Where-Object {
-    $_.Trim().TrimEnd('\', '/') -ieq $instructionsDirectory.TrimEnd('\', '/')
-}).Count -gt 0
-if (-not $hasInstructions -and $PSCmdlet.ShouldProcess(
-    "User environment: $environmentName", "Append $instructionsDirectory"
-)) {
-    $newValue = (@($directories) + $instructionsDirectory) -join ','
-    [Environment]::SetEnvironmentVariable($environmentName, $newValue, 'User')
+if (-not $IsLinux) {
+    $environmentName = 'COPILOT_CUSTOM_INSTRUCTIONS_DIRS'
+    $currentValue = [Environment]::GetEnvironmentVariable($environmentName, 'User')
+    $directories = @($currentValue -split ',' | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    $hasInstructions = @($directories | Where-Object {
+        $_.Trim().TrimEnd('\', '/') -ieq $instructionsDirectory.TrimEnd('\', '/')
+    }).Count -gt 0
+    if (-not $hasInstructions -and $PSCmdlet.ShouldProcess(
+        "User environment: $environmentName", "Append $instructionsDirectory"
+    )) {
+        $newValue = (@($directories) + $instructionsDirectory) -join ','
+        [Environment]::SetEnvironmentVariable($environmentName, $newValue, 'User')
+    }
 }
 
 $target = Join-Path $copilotHome 'agents'
@@ -72,9 +67,10 @@ if (Get-Item -LiteralPath $target -Force -ErrorAction SilentlyContinue) {
     if (-not (Test-Path -LiteralPath $source -PathType Container)) {
         throw "Required source directory is missing: $source"
     }
-    if ($PSCmdlet.ShouldProcess($target, "Create directory junction to $source")) {
+    $linkType = if ($IsLinux) { 'SymbolicLink' } else { 'Junction' }
+    if ($PSCmdlet.ShouldProcess($target, "Create $linkType to $source")) {
         New-Item -ItemType Directory -Path $copilotHome -Force | Out-Null
-        New-Item -ItemType Junction -Path $target -Target $source | Out-Null
+        New-Item -ItemType $linkType -Path $target -Target $source | Out-Null
     }
 }
 

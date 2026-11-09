@@ -16,10 +16,11 @@ Find the local session matching the user's hints. Never substitute cloud history
 
 ## GitHub Copilot CLI
 
-Search local session files under `~/.copilot/session-state`. The following initial search matches any keyword; check that all important keywords occur in the same session and examine the actual context before selecting it:
+Search local session files under `COPILOT_HOME/session-state`, or `~/.copilot/session-state` when `COPILOT_HOME` is unset. The following initial search matches any keyword; check that all important keywords occur in the same session and examine the actual context before selecting it:
 
 ```powershell
-$root = Join-Path $HOME '.copilot/session-state'
+$copilotHome = if ($env:COPILOT_HOME) { $env:COPILOT_HOME } else { Join-Path $HOME '.copilot' }
+$root = Join-Path $copilotHome 'session-state'
 rg -l -F -e 'keyword1' -e 'keyword2' $root
 ```
 
@@ -37,6 +38,6 @@ Resolve the placeholder to the skill's actual base directory; do not hardcode a 
 
 Interpret `ParentId` as a child session and `Archived` as an archived session. A child match is evidence for that child, not proof that its parent contains all keywords. Explain this distinction; do not silently replace the ID. Do not unarchive or modify a session. If the relevant session is archived, report it and do not claim that direct resume is verified.
 
-Before suggesting a command, validate the selected ID again using the same local V2 managed service (for example, `opencode2 api get /api/session/{id}` with the same verified executable). Confirm the session ID and location, and whether it is archived. The V2 CLI can create a session when given an unknown ID, so never suggest an unverified ID. Use the actual V2 executable, not an unverified `opencode` from PATH, to provide its `--session` command. The command starts an interactive client; do not run it yourself.
+Before suggesting a command, validate the selected ID again using the same local V2 managed service and verified executable (`api get /api/session/{id}`). Confirm the session ID and location, and whether it is archived. The V2 CLI can create a session when given an unknown ID, so never suggest an unverified ID. Use the actual V2 executable, not an unverified `opencode` from PATH, to provide its `--session` command. The command starts an interactive client; do not run it yourself.
 
 If the shell's `opencode` resolves to V1, use the verified `opencode2` executable when available. If a standalone or remote client is active, do not claim the managed service is its history without verifying the current session.
