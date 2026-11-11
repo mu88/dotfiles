@@ -2,5 +2,17 @@
   "$schema": "https://opencode.ai/v2/cli.json",
   "tabs": {
     "mode": "off"
+  },
+  "keybinds": {
+    "prompt.stash": "ctrl+s",
+    "prompt.stash.pop": "ctrl+s",
+    "input.visual.line.home": "alt+a,home",
+    "input.visual.line.end": "alt+e,end",
+    "input.buffer.home": "ctrl+home",
+    "input.buffer.end": "ctrl+end",
+    "session.first": "ctrl+g,alt+home,ctrl+alt+home",
+    "session.last": "ctrl+alt+g,ctrl+alt+end",
+    "which-key.home": "none",
+    "which-key.end": "none"
   }
 }
