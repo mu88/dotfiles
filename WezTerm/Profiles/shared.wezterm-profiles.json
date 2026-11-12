@@ -1,0 +1,64 @@
+{
+  "globals": {
+    "defaultProfile": "{c418409d-dfba-495f-82ee-64924c6ad7a7}",
+    "environment": {
+      "EDITOR": "code --wait",
+      "VISUAL": "code --wait"
+    },
+    "backgroundImage": "${MU88_DOTFILES}/WindowsTerminal/Background.JPG",
+    "backgroundImageOpacity": 0.2,
+    "windowOpacity": 1
+  },
+  "profiles": {
+    "defaults": {
+      "suppressApplicationTitle": true,
+      "startingDirectory": "${LOCAL_DEV_DIR}"
+    },
+    "list": [
+      {
+        "guid": "{c418409d-dfba-495f-82ee-64924c6ad7a7}",
+        "name": "PS Core",
+        "icon": "⚡",
+        "args": [
+          "pwsh",
+          "-NoLogo"
+        ]
+      },
+      {
+        "guid": "{edd9f9fd-f8e5-4eb7-a657-e3ae8c15953d}",
+        "name": "PS Core / GitHub",
+        "icon": "⚡",
+        "args": [
+          "pwsh",
+          "-NoLogo"
+        ],
+        "startingDirectory": "${LOCAL_DEV_DIR}/GitHub"
+      },
+      {
+        "guid": "{08e28aac-91ff-4fd1-8ee1-c5008ef71467}",
+        "name": "GitHub Copilot CLI",
+        "args": [
+          "copilot",
+          "--no-auto-update"
+        ],
+        "environment": {
+          "COPILOT_AUTO_UPDATE": "false"
+        },
+        "suppressApplicationTitle": false,
+        "icon": ""
+      },
+      {
+        "guid": "{e54718ad-7cb1-40fe-a426-4db638b911ab}",
+        "name": "OpenCode CLI",
+        "args": [
+          "opencode"
+        ],
+        "environment": {
+          "OPENCODE_DISABLE_AUTOUPDATE": "1"
+        },
+        "suppressApplicationTitle": false,
+        "icon": "󰚩"
+      }
+    ]
+  }
+}

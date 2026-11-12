@@ -1,0 +1,62 @@
+{
+  "profiles": {
+    "list": [
+      {
+        "guid": "{8f4b9311-b4bf-48c8-b7c2-e52d32664931}",
+        "name": "Windows PowerShell",
+        "icon": "⚡",
+        "args": [
+          "powershell.exe"
+        ]
+      },
+      {
+        "guid": "{76cb993b-f7d4-4b7c-a07e-0010b923550a}",
+        "name": "Command Prompt",
+        "icon": "💻",
+        "args": [
+          "cmd.exe"
+        ]
+      },
+      {
+        "guid": "{23f9b466-fc8a-483f-8aac-5300ce5a4894}",
+        "name": "Git Bash",
+        "icon": "📟",
+        "args": [
+          "pwsh",
+          "-NoLogo",
+          "-NoProfile",
+          "-Command",
+          "& (Join-Path $env:ProgramFiles 'Git/bin/bash.exe')"
+        ]
+      },
+      {
+        "guid": "{ffc602aa-8333-48ca-801c-677be1fff69b}",
+        "name": "GitHub Copilot CLI (psmux)",
+        "args": [
+          "pwsh",
+          "-NoLogo",
+          "-NoExit",
+          "-Command",
+          "& (Join-Path $env:MU88_DOTFILES 'WindowsTerminal/start-copilot-psmux.ps1')"
+        ],
+        "environment": {
+          "COPILOT_AUTO_UPDATE": "false"
+        },
+        "suppressApplicationTitle": false,
+        "icon": ""
+      },
+      {
+        "guid": "{66605aba-e4f0-42a7-8383-bfc7b453f147}",
+        "name": "psmux Sessions",
+        "icon": "🔄",
+        "args": [
+          "pwsh",
+          "-NoLogo",
+          "-NoExit",
+          "-Command",
+          "& (Join-Path $env:MU88_DOTFILES 'WindowsTerminal/attach-copilot-psmux.ps1')"
+        ]
+      }
+    ]
+  }
+}

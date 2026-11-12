@@ -1,0 +1,28 @@
+# WezTerm
+
+- Use a WezTerm nightly build that supports OSC 9;4 progress. The stable 2024 release does not provide the tested progress behavior.
+- Load `WezTerm/wezterm.lua` from the workstation's WezTerm configuration. `globals.defaultProfile` selects the default profile by GUID; without it, PowerShell Core is the default program.
+- Set `WEZTERM_JSON_PROFILE_SOURCES` to a semicolon-separated list of JSON profile files. Sources are loaded in order; an unset or empty variable loads no JSON profiles. Missing or invalid sources prevent a new GUI from starting. If a source becomes invalid during a configuration reload, existing sessions stay open, but the launch menu is empty until the source is fixed.
+- Under the new contract, later sources deep-merge profiles by `guid` while preserving their order; `args` arrays replace earlier arrays. Profile `defaults` are also merged. This permits professional sources to override shared settings.
+- Profile files live in `Profiles/`. `shared.wezterm-profiles.json` provides shared PowerShell and AI entries; `windows.wezterm-profiles.json` adds Windows shells and PSMux. Other repositories can provide their own sources; machine-only profiles belong in a local file outside repositories.
+- A source is a JSON object with optional `globals` and `profiles` sections. `globals` may contain `defaultProfile`, `environment`, `backgroundImage`, `backgroundImageOpacity`, and `windowOpacity`; `profiles` may contain `defaults` and `list`. `defaultProfile` must refer to an existing profile GUID. The shared `profiles.defaults.startingDirectory` applies unless a profile specifies another directory.
+- The shared source configures `EDITOR` and `VISUAL` globally. Profile-specific environment values take precedence. Existing panes retain the environment they received when started.
+- Each entry in `list` has a `guid`. A complete profile needs a `name` and an `args` array; a later entry with the same GUID may contain only fields to override. Optional fields are `startingDirectory`, `environment`, `icon` (a Nerd Font glyph), `tabTitle`, and `suppressApplicationTitle`. `${NAME}` placeholders in `startingDirectory` and `backgroundImage` expand from WezTerm's environment; missing or empty variables are errors. Arguments and environment values are not expanded. On Windows, WezTerm also merges user environment variables from the registry, which can override inherited values.
+- Profile names and icons are separate; startup scripts refer to profile names without icons. Profiles use fixed names by default; `tabTitle` can replace the fixed name and `suppressApplicationTitle: false` enables application titles. The window title follows the active tab without its profile icon or spinner; characters supplied in application or manual titles are preserved. The AI profiles use application titles and show a spinner for indeterminate progress, including when it runs in another pane.
+- Right-click the `+` button or press `Ctrl+Shift+Space` to choose a profile. Left-click `+` or press `Ctrl+Shift+T` to open the default profile. These profile selectors preserve the profile's icon and title settings; entries opened through WezTerm's native launcher do not retain that association. `Ctrl+Shift+D` splits right; `Ctrl+Shift+E` splits down. A split starts a new process using the active pane's profile, including its configured starting directory and environment; it does not clone the existing session. If the active pane's profile is unknown, the selector assigns a profile to that pane and opens the split. `Ctrl+Shift+W` closes the current tab without confirmation and terminates its processes. Other close actions retain WezTerm's normal confirmation behavior.
+- OpenCode and Copilot use their normal session storage, authentication, instructions, and integrations.
+- Nightly updates are not automatic. Preserve a working extracted build for rollback and do not replace files belonging to a running instance.
+
+## Windows taskbar progress
+
+Taskbar progress support is enabled on Windows. It is best-effort and limited to one uniquely identified window; multiple windows disable the indication. The helper does not automatically delete its temporary state file, and a helper crash can leave a stale indication. An isolated two-tab fixture was visually checked; the complete configuration's startup integration remains to be reviewed.
+
+## Named startup tabs
+
+Set `WEZTERM_STARTUP_PROFILES` to a JSON array of registered profile names or GUIDs for one WezTerm GUI start. The named tabs open in order, followed by the default profile tab. Invalid selectors or input cause the new GUI process to exit with an error; explicit programs passed to `wezterm start` take precedence. The variable is cleared for launched panes so later nested WezTerm starts do not repeat the layout.
+
+On Windows, `Start-WezTermProfiles.ps1` accepts profile GUIDs, an optional working directory, and `-AppendDefault`. It opens tabs in the existing WezTerm window or requests one GUI start if none exists. It refuses to choose between multiple GUIs or windows and does not retry failed requests. Independent simultaneous starts can still race. A successful cold request does not confirm that every requested profile started.
+
+## Verification
+
+The Node tests under `WezTerm/tests` include optional headless checks; test integration for the new contract is still pending, and some existing tests expect the old format. Set `WEZTERM_TEST_EXECUTABLE` to an existing WezTerm executable for the Lua configuration tests. To run the optional isolated Windows GUI check, set `WEZTERM_TEST_GUI_EXECUTABLE` and `WEZTERM_TEST_LIVE_GUI=1`. No production profile or workstation startup script is launched by these tests.
