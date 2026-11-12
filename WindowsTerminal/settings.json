@@ -134,7 +134,7 @@
                 "icon": "%MU88_DOTFILES%\\Stuff\\GitHub Copilot White.ico"
             },
             {
-                "commandline": "pwsh.exe -NoExit -Command opencode2",
+                "commandline": "pwsh.exe -NoExit -Command opencode",
                 "environment": 
                 {
                     "OPENCODE_DISABLE_AUTOUPDATE": "1",

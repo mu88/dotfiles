@@ -58,7 +58,9 @@ if ($env:MU88_DOTFILES) {
 }
 ```
 
-The profile runs in interactive terminals; on Windows it requires Windows Terminal. Use `WindowsTerminal/settings.json` for personal profiles. Windows with PSMux sets `PSMUX_CONFIG_FILE` to `{checkout}/WindowsTerminal/psmux.conf`.
+The profile runs in interactive terminals; on Windows it requires Windows Terminal or WezTerm. Use `WindowsTerminal/settings.json` for personal profiles. Windows with PSMux sets `PSMUX_CONFIG_FILE` to `{checkout}/WindowsTerminal/psmux.conf`.
+
+WezTerm loads `{checkout}/WezTerm/wezterm.lua`; `WEZTERM_JSON_PROFILE_SOURCES` lists JSON profile files separated by semicolons. See [WezTerm/README.md](WezTerm/README.md).
 
 ## SOFA
 

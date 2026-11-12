@@ -25,7 +25,8 @@ export default Plugin.define({
     }
 
     function reportNativeProgress(status: Status) {
-      if (process.platform !== "win32" || !process.env.WT_SESSION || !process.stdout.isTTY) return;
+      const supportsProgress = (process.platform === "win32" && !!process.env.WT_SESSION) || process.env.TERM_PROGRAM === "WezTerm";
+      if (!supportsProgress || !process.stdout.isTTY) return;
       const progress = {
         busy: "3;0",
         idle: "0;0",

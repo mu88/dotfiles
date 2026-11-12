@@ -1,7 +1,7 @@
-# Skip automation and preserve the Windows Terminal restriction on Windows.
+# Skip automation and unsupported Windows terminals.
 if ([Console]::IsInputRedirected -or [Console]::IsOutputRedirected -or
     ([Environment]::GetCommandLineArgs() -match '^-(NonInteractive|NonI)$') -or
-    ($IsWindows -and -not $env:WT_SESSION)) {
+    ($IsWindows -and -not ($env:WT_SESSION -or $env:TERM_PROGRAM -eq 'WezTerm'))) {
     return
 }
 
