@@ -81,6 +81,8 @@ Preserve personal instructions, agents, skills, and hooks; review existing direc
 | --- | --- |
 | Shared `opencode.json` supplies instructions, skills, the custom agent, RTK, quota, and Binlog MCP | Inspect config sources and actual registries/status; do not duplicate definitions locally |
 | Machine-specific settings stay in the user config directory (`~/.config/opencode` or the existing `XDG_CONFIG_HOME` location) | Inspect relevant settings; use supported credential storage for credentials |
+| Quota appears in the session footer even when its sidebar is visible | Check effective `statusLine.show` and `statusLine.withSidebar` are `true` via `/quota_settings` or `quota_settings_get`; verify the TUI after changes |
+| Quota does not show a toast after each reply | Set `toast.afterReply` to `off` via `/quota_settings`; check the effective value with `quota_settings_get` |
 | Windows Terminal's local `cli.json` registers `{checkout}/AI/OpenCode/plugins/status-indicator` and sets `terminal.title` to `false` | Inspect these fields; verify the real TUI title after changes |
 
 Binlog MCP needs a suitable .NET SDK and NuGet access. Inline CLI JSON merges over local settings without replacing the local plugin list. See [OpenCode operation](AI/OpenCode/README.md) for runtime details.
