@@ -300,10 +300,27 @@ test('UnchangedSnapshotsDoNotRewriteTitleOrProgressOrPollServer', () => {
   client.cleanup();
 });
 
+for (const platform of ['win32', 'linux']) test(`WezTermProgressFollowsSessionOn${platform}`, () => {
+  const client = createClient({ platform, environment: { TERM_PROGRAM: 'WezTerm' } });
+  client.sessions.get('alpha').status = 'running';
+  client.tick();
+  assert.equal(client.titles.at(-1), 'Alpha conversation');
+  assert.equal(client.progress.at(-1), osc('3;0'));
+  client.sessions.get('alpha').status = 'idle';
+  client.tick();
+  assert.equal(client.progress.at(-1), osc('0;0'));
+  client.sessions.get('alpha').permissions = [{}];
+  client.tick();
+  assert.equal(client.titles.at(-1), '◉ Alpha conversation');
+  assert.equal(client.progress.at(-1), osc('4;50'));
+  client.cleanup();
+});
+
 for (const [label, platform, environment, isTTY] of [
   ['NonWindows', 'linux', { WT_SESSION: 'fixture' }, true],
   ['OtherTerminal', 'win32', {}, true],
   ['RedirectedOutput', 'win32', { WT_SESSION: 'fixture' }, false],
+  ['WezTermRedirectedOutput', 'win32', { TERM_PROGRAM: 'WezTerm' }, false],
 ]) test(`NativeProgressSkippedFor${label}`, () => {
   const client = createClient({ platform, environment, isTTY });
   client.sessions.get('alpha').status = 'running';
