@@ -1,0 +1,1 @@
+Let's discuss each issue or question individually. Explain the context, ask concise questions, and record my explicit decision as a todo. Ask whether I want to proceed to the next issue. Do not implement anything during this discussion; only collect my decisions. At the end, briefly present my decisions as todos and ask for my final approval before implementing them.
