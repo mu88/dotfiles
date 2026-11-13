@@ -3,6 +3,12 @@
   "tabs": {
     "mode": "off"
   },
+  "terminal": {
+    "title": false
+  },
+  "debug": {
+    "turn_tokens": "verbose"
+  },
   "keybinds": {
     "prompt.stash": "ctrl+s",
     "prompt.stash.pop": "ctrl+s",

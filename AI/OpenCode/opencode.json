@@ -92,7 +92,6 @@
     }
   },
   "plugins": [
-    "file:///{env:MU88_DOTFILES}/AI/OpenCode/plugins/rtk",
     "@slkiser/opencode-quota"
   ],
   "instructions": [

@@ -1,3 +1,5 @@
+// Based on sorenjuul/opencode-tui-status-indicator at 8bb2a777597aa33ceb6459a22b4684e33a8296b6; see LICENSE.
+// Local modifications AI-assisted with OpenCode.
 import { Plugin } from "@opencode/plugin/tui";
 
 const CACHE_POLL_INTERVAL = 500;

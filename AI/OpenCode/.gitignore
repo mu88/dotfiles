@@ -1,0 +1,9 @@
+# Machine-local service configuration
+/service.json
+
+# Generated dependencies and package metadata
+node_modules/
+/package.json
+/package-lock.json
+/bun.lock
+/bun.lockb

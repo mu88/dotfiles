@@ -5,7 +5,7 @@ import { posix, win32 } from 'node:path';
 import { test } from 'node:test';
 import vm from 'node:vm';
 
-const source = stripTypeScriptTypes(readFileSync(new URL('../plugins/rtk.ts', import.meta.url), 'utf8'))
+const source = stripTypeScriptTypes(readFileSync(new URL('../plugins/rtk/index.ts', import.meta.url), 'utf8'))
     .replace(/^import .+$/gm, '')
     .replace(/^export default .+$/gm, '')
     .replace(/^export \{.+$/gm, '')

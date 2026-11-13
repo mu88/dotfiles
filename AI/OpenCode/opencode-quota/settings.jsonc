@@ -1,0 +1,9 @@
+{
+  // Source: https://github.com/slkiser/opencode-quota/blob/main/docs/readme/configuration.md
+  "statusLine": {
+    "withSidebar": true
+  },
+  "toast": {
+    "afterReply": "off"
+  }
+}
