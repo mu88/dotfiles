@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "github-copilot/gpt-6.1-terra",
+  "model": "github-copilot/auto",
   "commands": {
     "mu88-decisions": {
       "description": "Discuss issues one by one and collect decisions before implementation",
