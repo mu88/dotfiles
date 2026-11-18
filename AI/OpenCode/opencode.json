@@ -104,5 +104,8 @@
   ],
   "skills": ["{env:MU88_DOTFILES}/AI/Shared/skills"],
   "experimental": { "todo": true },
-  "update": "disable"
+  "update": "disable",
+  "provider": {
+    "copilot": {}
+  }
 }
