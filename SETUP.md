@@ -9,7 +9,7 @@ Windows and Linux Mint. `{checkout}` is the absolute path to the permanent dotfi
 | `MU88_DOTFILES` | `{checkout}` |
 | `LOCAL_DEV_DIR` | Machine-specific development root for AI worktrees |
 | `OPENCODE_CONFIG_DIR` | `{checkout}/AI/OpenCode` |
-| `OPENCODE_CONFIG` | Unset |
+| `OPENCODE_CONFIG` | Unset by default; optionally points to one additional machine-local OpenCode config file |
 | `COPILOT_CUSTOM_INSTRUCTIONS_DIRS` | Include `{checkout}/AI/Shared/instructions` and `{checkout}/AI/Shared/RTK/instructions` exactly once; preserve other entries |
 | `OPENCODE_CLI_CONFIG_CONTENT` | Inline JSON for machine-local CLI overrides, e.g. `{"session":{"permissions":"autoaccept"}}` |
 
