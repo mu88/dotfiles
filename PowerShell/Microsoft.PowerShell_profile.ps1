@@ -58,6 +58,22 @@ try {
     Set-PSReadLineOption -PredictionViewStyle ListView
     Set-PSReadLineOption -EditMode Windows
 
+    # Based on https://github.com/PowerShell/PSReadLine/issues/1778#issuecomment-1184463014
+    Set-PSReadLineKeyHandler -Key 'Shift+Delete' -BriefDescription 'RemoveFromHistory' -ScriptBlock {
+        $line = $null
+        $cursor = $null
+        [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref] $line, [ref] $cursor)
+        if ([string]::IsNullOrWhiteSpace($line)) { return }
+
+        $historyPath = (Get-PSReadLineOption).HistorySavePath
+        $entry = [regex]::Escape(($line -replace '\n', "```n"))
+        $history = Get-Content -LiteralPath $historyPath -Raw
+        $filteredHistory = $history -creplace "(?m)^$entry\r?\n", ''
+        if ($filteredHistory -cne $history) {
+            Set-Content -LiteralPath $historyPath -Value $filteredHistory -NoNewline
+        }
+    }
+
     # PowerShell parameter completion shim for the dotnet CLI
     Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
         param($commandName, $wordToComplete, $cursorPosition)
