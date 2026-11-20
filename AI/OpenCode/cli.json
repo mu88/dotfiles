@@ -18,6 +18,8 @@
     "input.buffer.end": "ctrl+end",
     "session.first": "ctrl+g,alt+home,ctrl+alt+home",
     "session.last": "ctrl+alt+g,ctrl+alt+end",
+    // Available once https://github.com/anomalyco/opencode/issues/51694 is fixed.
+    "which-key.toggle": "<leader>k",
     "which-key.home": "none",
     "which-key.end": "none"
   }
