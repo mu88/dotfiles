@@ -7,7 +7,7 @@ Windows and Linux Mint. `{checkout}` is the absolute path to the permanent dotfi
 | Variable | Value |
 | --- | --- |
 | `MU88_DOTFILES` | `{checkout}` |
-| `LOCAL_DEV_DIR` | Machine-specific development root for AI worktrees |
+| `LOCAL_DEV_DIR` | Machine-specific development root for AI worktrees and shared skills |
 | `OPENCODE_CONFIG_DIR` | `{checkout}/AI/OpenCode` |
 | `OPENCODE_CONFIG` | Unset by default; optionally points to one additional machine-local OpenCode config file |
 | `COPILOT_CUSTOM_INSTRUCTIONS_DIRS` | Include `{checkout}/AI/Shared/instructions` and `{checkout}/AI/Shared/RTK/instructions` exactly once; preserve other entries |
@@ -47,6 +47,19 @@ Paths are relative to `COPILOT_HOME`, or `~/.copilot` when unset:
 ## OpenCode V2
 
 The environment selects `AI/OpenCode`; no links are needed. Local CLI overrides use inline JSON, not another file. RTK must be on `PATH`; Binlog MCP requires .NET and NuGet access. Credentials and runtime data remain local.
+
+## Shared AI skills
+
+Common third-party skills directory: `$env:LOCAL_DEV_DIR/AI/skills`.
+
+- **OpenCode**: Configured via the `skills` entry in `AI/OpenCode/opencode.json`.
+- **Copilot CLI**: Register via `copilot skill add "$env:LOCAL_DEV_DIR/AI/skills"`. To let shared skills take precedence over bundled plugin copies without disabling plugin agents, MCP servers, or LSP, exclude plugin skill discovery:
+  ```powershell
+  $copilotHome = if ($env:COPILOT_HOME) { $env:COPILOT_HOME } else { Join-Path $HOME '.copilot' }
+  copilot config ignoredSkillsLocations (Join-Path $copilotHome 'installed-plugins/dotnet-agent-skills')
+  ```
+  Other marketplaces can be excluded analogously.
+- **Updates**: Follow `main`, not tagged releases. Re-run only the shared skill installation block in `Scripts/InstallDevelopmentEnvironment.ps1`, with its shared-directory and package-list declarations; do not run the complete workstation installer to update skills. For an individual skill, use `gh skill install` with its repository path suffixed by `@main`, `--dir "$env:LOCAL_DEV_DIR/AI/skills"`, and `--force`. An unqualified `gh skill update` can select an older tagged release.
 
 ## PowerShell and Windows Terminal
 

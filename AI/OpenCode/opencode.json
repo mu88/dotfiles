@@ -102,7 +102,10 @@
     "{env:MU88_DOTFILES}/AI/Shared/instructions/*.instructions.md",
     "{env:MU88_DOTFILES}/AI/Shared/RTK/instructions/rtk.instructions.md"
   ],
-  "skills": ["{env:MU88_DOTFILES}/AI/Shared/skills"],
+  "skills": [
+    "{env:MU88_DOTFILES}/AI/Shared/skills",
+    "{env:LOCAL_DEV_DIR}/AI/skills"
+  ],
   "experimental": { "todo": true },
   "update": "disable",
   "provider": {

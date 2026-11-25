@@ -1,6 +1,12 @@
 $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $true
 
+if ([string]::IsNullOrWhiteSpace($env:LOCAL_DEV_DIR)) {
+    throw 'LOCAL_DEV_DIR environment variable must be set and non-empty.'
+}
+
+$sharedSkillsDir = Join-Path $env:LOCAL_DEV_DIR 'AI' 'skills'
+
 choco feature enable --name=useRememberedArgumentsForUpgrades
 
 [Environment]::SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "true", [System.EnvironmentVariableTarget]::User)
@@ -25,7 +31,6 @@ gh extension install github/gh-stack
 choco install github-copilot-cli -y
 choco install opencode -y
 choco install rtk -y
-copilot skill install github/gh-stack
 copilot plugin marketplace add dotnet/modernize-dotnet
 copilot plugin install modernize-dotnet@modernize-dotnet-plugins
 copilot plugin marketplace add dotnet/skills
@@ -50,14 +55,17 @@ foreach ($skillPackage in $dotnetSkillPackages) {
     copilot plugin install "${skillPackage}@dotnet-agent-skills"
 }
 
-# OpenCode skills: re-run this block and the package list above for intentional updates.
-gh skill install github/gh-stack skills/gh-stack@main --agent opencode --scope user --force
+# Shared AI skills: re-run this block and the package list above for intentional updates.
+gh skill install github/gh-stack skills/gh-stack@main --dir $sharedSkillsDir --force
 $dotnetSkillPaths = gh api repos/dotnet/skills/git/trees/main --field recursive=1 --method GET --jq '.tree[] | select(.path | endswith("/SKILL.md")) | .path'
 foreach ($skillPackage in $dotnetSkillPackages) {
     foreach ($skillPath in ($dotnetSkillPaths | Where-Object { $_.StartsWith("plugins/$skillPackage/skills/") })) {
-        gh skill install dotnet/skills "$skillPath@main" --agent opencode --scope user --force
+        gh skill install dotnet/skills "$skillPath@main" --dir $sharedSkillsDir --force
     }
 }
+copilot skill add $sharedSkillsDir
+$copilotHome = if ($env:COPILOT_HOME) { $env:COPILOT_HOME } else { Join-Path $HOME '.copilot' }
+copilot config ignoredSkillsLocations (Join-Path $copilotHome 'installed-plugins' 'dotnet-agent-skills')
 
 # IDE and essential development
 choco install nodejs -y
