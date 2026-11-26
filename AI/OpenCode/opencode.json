@@ -87,6 +87,7 @@
       "binlog": {
         "type": "local",
         "command": ["dotnet", "dnx", "Microsoft.AITools.BinlogMcp", "--yes", "--prerelease"],
+        "cwd": "~",
         "timeout": { "catalog": 120000, "execution": 120000 }
       }
     }
